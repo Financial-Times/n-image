@@ -1,0 +1,24 @@
+{
+  "name": "n-image",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Financial-Times/n-image",
+  "authors": [
+    "Tom Parker <tom.p.parker@googlemail.com>"
+  ],
+  "description": "Responsive image component for next",
+  "main": [
+    "main.scss",
+    "main.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "picturefill": "^2.3.1"
+  }
+}
