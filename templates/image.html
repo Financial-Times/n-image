@@ -10,7 +10,7 @@
 		<source srcset="{{#resize image.srcset.m}}{{image.url}}{{/resize}}" media="(min-width: 730px)">
 	{{/if}}
 	{{#if image.srcset.s}}
-		<source srcset="{{#resize image.srcset.s}}{{image.url}}{{/resize}}" media="(max-width: 729px)">
+		<source srcset="{{#resize image.srcset.s}}{{image.url}}{{/resize}}" media="(min-width: 490px)">
 	{{/if}}
 	<!--[if IE 9]></video><![endif]-->
 	{{#if image.srcset.fallback}}
