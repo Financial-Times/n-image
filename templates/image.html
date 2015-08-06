@@ -1,4 +1,4 @@
-<picture class="n-image">
+<picture class="{{#if image.class}}{{image.class}} {{/if}}n-image">
 	<!--[if IE 9]><video style="display: none;"><![endif]-->
 	{{#if image.srcset.xl}}
 		<source srcset="{{#resize image.srcset.xl}}{{image.url}}{{/resize}}" media="(min-width: 1210px)">
