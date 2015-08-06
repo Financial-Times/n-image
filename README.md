@@ -15,6 +15,7 @@ The following image object is expected by the component -
 {
 	url: 'someurl', //This will be passed into the image service
 	alt: 'your alt text',
+	class: 'any-bespoke-classes you-want-to-add', //Optional added to <picture> element along with n-image
 	srcset: {
 		fallback: 500, //Optional pixel width for fallback image.
 		default: 200, //The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
