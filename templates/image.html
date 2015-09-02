@@ -1,23 +1,23 @@
 <picture class="{{#if image.class}}{{image.class}} {{/if}}n-image">
 	<!--[if IE 9]><video style="display: none;"><![endif]-->
 	{{#if image.srcset.xl}}
-		<source srcset="{{#resize image.srcset.xl}}{{image.url}}{{/resize}}" media="(min-width: 1210px)">
+		<source srcset="{{#resize image.srcset.xl}}{{{image.url}}}{{/resize}}" media="(min-width: 1210px)">
 	{{/if}}
 	{{#if image.srcset.l}}
-		<source srcset="{{#resize image.srcset.l}}{{image.url}}{{/resize}}" media="(min-width: 970px)">
+		<source srcset="{{#resize image.srcset.l}}{{{image.url}}}{{/resize}}" media="(min-width: 970px)">
 	{{/if}}
 	{{#if image.srcset.m}}
-		<source srcset="{{#resize image.srcset.m}}{{image.url}}{{/resize}}" media="(min-width: 730px)">
+		<source srcset="{{#resize image.srcset.m}}{{{image.url}}}{{/resize}}" media="(min-width: 730px)">
 	{{/if}}
 	{{#if image.srcset.s}}
-		<source srcset="{{#resize image.srcset.s}}{{image.url}}{{/resize}}" media="(min-width: 490px)">
+		<source srcset="{{#resize image.srcset.s}}{{{image.url}}}{{/resize}}" media="(min-width: 490px)">
 	{{/if}}
 	<!--[if IE 9]></video><![endif]-->
 	{{#if image.srcset.fallback}}
-		<img class="n-image__img" src="{{#resize image.srcset.fallback}}{{image.url}}{{/resize}}" alt="{{image.alt}}"/>
+		<img class="n-image__img" src="{{#resize image.srcset.fallback}}{{{image.url}}}{{/resize}}" alt="{{image.alt}}"/>
 	{{else}}
 		{{#if image.srcset.default}}
-			<img class="n-image__img" srcset="{{#resize image.srcset.default}}{{image.url}}{{/resize}}" alt="{{image.alt}}"/>
+			<img class="n-image__img" srcset="{{#resize image.srcset.default}}{{{image.url}}}{{/resize}}" alt="{{image.alt}}"/>
 		{{else}}
 			<img class="n-image__img" alt="{{image.alt}}"/>
 		{{/if}}
