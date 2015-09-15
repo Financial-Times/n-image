@@ -1,7 +1,15 @@
-.n-image {
-	max-width: 100%;
-}
+$_n-image_applied: false !default;
 
-.n-image__img {
-	max-width: 100%;
+@if (not $_n-image_applied) {
+
+	.n-image {
+		max-width: 100%;
+	}
+
+	.n-image__img {
+		max-width: 100%;
+	}
+
+	$_n-image_applied: true !global;
+
 }
