@@ -7,8 +7,7 @@
   ],
   "description": "Responsive image component for next",
   "main": [
-    "main.scss",
-    "main.js"
+    "main.scss"
   ],
   "license": "MIT",
   "ignore": [
@@ -17,8 +16,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "dependencies": {
-    "picturefill": "^2.3.1"
-  }
+  ]
 }
