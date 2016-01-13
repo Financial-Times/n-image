@@ -2,11 +2,6 @@
   "name": "n-image",
   "description": "Next responsive image component",
   "version": "2.0.0",
-  "private": "true",
-  "scripts": {
-    "test": "make test"
-  },
-  "pre-commit": "make verify",
   "devDependencies": {
     "next-build-tools": "^5.15.0"
   }
