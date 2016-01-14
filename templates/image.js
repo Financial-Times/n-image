@@ -31,6 +31,8 @@ export default class Image extends Component {
 		const srcset = this.props.srcset;
 		const url = this.props.url;
 
+		// dangerouslySetInnerHTML is used to render the conditional IE9 comments
+		// Will throw an error if such comments are returned directly
 		return (
 			<picture className={picClasses.join(' ')} dangerouslySetInnerHTML={createMarkup(imgClasses, alt, srcset, url)}>
 			</picture>

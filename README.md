@@ -27,23 +27,31 @@ The following image object is expected by the component (when used as a *bower c
 }
 ```
 
-The following image object is expect by the component (when used as a *node package to create a React component*) -
+Arguments are passed to the React component (when used as a *node package*) -
 
 ```javascript
-{
-	url: 'someurl', //This will be passed into the image service
-	alt: 'your alt text',
-	picClass: 'any-bespoke-classes you-want-to-add', //Optional added to <picture> element along with n-image
-	imgClass: 'any-bespoke-classes you-want-to-add', //Optional added to <img> elements along with n-image__img
-	srcset: {
-		fallback: 500, //Optional pixel width for fallback image.
-		default: 200, //The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
-		s: 300,
-		m: 500,
-		l: 700,
-		xl: 1000
-	}
+<NImage picClass={picClass} imgClass={imgClass} srcset={srcset} url={url} alt={alt}/>
+```
+
+The arguments should be of the following format:
+
+```
+picClass: 'any-bespoke-classes you-want-to-add' //Optional added to <picture> element along with n-image
+
+imgClass: 'any-bespoke-classes you-want-to-add' //Optional added to <img> elements along with n-image__img
+
+srcset: {
+	fallback: 500, //Optional pixel width for fallback image.
+	default: 200, //The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
+	s: 300,
+	m: 500,
+	l: 700,
+	xl: 1000
 }
+
+url: 'someurl'
+
+alt: 'your alt text'
 ```
 
 The `s`, `m`, `l`, `xl` size match to those used in o-grid and the relevant width images will be loaded.
