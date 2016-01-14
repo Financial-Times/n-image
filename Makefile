@@ -1,6 +1,7 @@
 install:
 	obt install --verbose
 
-test:
-	obt build
-	obt verify
+verify:
+	nbt verify --skip-layout-checks --skip-dotenv-check
+
+test: verify

@@ -1,0 +1,9 @@
+{
+  "name": "n-image",
+  "description": "Next responsive image component",
+  "version": "2.0.0",
+  "main": "main.js",
+  "devDependencies": {
+    "next-build-tools": "^5.15.0"
+  }
+}
