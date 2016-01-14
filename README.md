@@ -9,13 +9,32 @@ NOTE: This implementation is likely to change as we discover more scenarios that
 
 The image component allows you to specify different size images to be used at different breakpoints. It's essentially a wrapper around the new `<picture></picture>` element. Currently we're using the latest version of picturefill to polyfill the picture element for older browsers. This will be removed when a picture polyfill is added to the polyfill service in the near future.
 
-The following image object is expected by the component -
+The following image object is expected by the component (when used as a *bower component*) -
 
 ```javascript
 {
 	url: 'someurl', //This will be passed into the image service
 	alt: 'your alt text',
 	class: 'any-bespoke-classes you-want-to-add', //Optional added to <picture> element along with n-image
+	srcset: {
+		fallback: 500, //Optional pixel width for fallback image.
+		default: 200, //The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
+		s: 300,
+		m: 500,
+		l: 700,
+		xl: 1000
+	}
+}
+```
+
+The following image object is expect by the component (when used as a *node package to create a React component*) -
+
+```javascript
+{
+	url: 'someurl', //This will be passed into the image service
+	alt: 'your alt text',
+	picClass: 'any-bespoke-classes you-want-to-add', //Optional added to <picture> element along with n-image
+	imgClass: 'any-bespoke-classes you-want-to-add', //Optional added to <img> elements along with n-image__img
 	srcset: {
 		fallback: 500, //Optional pixel width for fallback image.
 		default: 200, //The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
