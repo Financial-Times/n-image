@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
+import buildUrl from '../helpers/build-url';
 
 export default class Image extends Component {
 	render () {
-
 		const createMarkup = (imgClasses, alt, srcset, url) => {
 			const imgClass = imgClasses.join(' ');
 			return 	{__html:
@@ -29,7 +29,7 @@ export default class Image extends Component {
 
 		const alt = this.props.alt ? this.props.alt : '';
 		const srcset = this.props.srcset;
-		const url = this.props.url;
+		const url = buildUrl(this.props.url, this.props.imgServiceReqd);
 
 		// dangerouslySetInnerHTML is used to render the conditional IE9 comments
 		// Will throw an error if such comments are returned directly
