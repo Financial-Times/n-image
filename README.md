@@ -30,7 +30,7 @@ The following image object is expected by the component (when used as a *bower c
 Arguments are passed to the React component (when used as a *node package*) -
 
 ```javascript
-<NImage picClass={picClass} imgClass={imgClass} srcset={srcset} url={url} imgServiceReqd={imgServiceReqd} alt={alt}/>
+<NImage picClass={picClass} imgClass={imgClass} srcset={srcset} url={url} isImgServiceUrl={isImgServiceUrl} alt={alt}/>
 ```
 
 The arguments should be of the following format:
@@ -51,7 +51,7 @@ srcset: {
 
 url: 'someurl'
 
-imgServiceReqd: true //Boolean value dictates whether url will use image service or not
+isImgServiceUrl: true //Boolean value dictates whether url will use image service or not
 
 alt: 'your alt text' //Optional alt text
 ```

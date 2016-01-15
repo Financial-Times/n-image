@@ -1,12 +1,14 @@
 import qs from 'querystring';
 
-export default (url, imgServiceReqd) => {
-	const imageOptions = {
+export default (url, params = {}, { isImgServiceUrl = false }) => {
+	const defaultOptions = {
 		source: 'next',
 		fit: 'scale-down',
 		compression: 'best'
 	};
 
-	if (imgServiceReqd) url = `https:\/\/next-geebee.ft.com/image/v1/images/raw/${encodeURIComponent(url)}`;
-	return url += `?${qs.stringify(imageOptions)}&width=`;
+	const options = Object.assign({}, defaultOptions, params);
+
+	if (!isImgServiceUrl) url = `https:\/\/next-geebee.ft.com/image/v1/images/raw/${encodeURIComponent(url)}`;
+	return url += `?${qs.stringify(options)}`;
 }
