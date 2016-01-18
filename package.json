@@ -2,7 +2,7 @@
   "name": "n-image",
   "description": "Next responsive image component",
   "version": "2.1.0",
-  "main": "main.js",
+  "main": "./templates/image.js",
   "devDependencies": {
     "next-build-tools": "^5.15.0"
   }
