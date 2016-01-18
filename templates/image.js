@@ -9,10 +9,10 @@ export default class Image extends Component {
 
 			return 	{__html:
 				`<!--[if IE 9]><video style="display: none;"><![endif]-->
-				${srcset.xl ? `<source srcSet=${addWidth(url, srcset.xl)} media="(min-width: 1220px)"/>` : null}
-				${srcset.l ? `<source srcSet=${addWidth(url, srcset.l)} media="(min-width: 980px)"/>` : null}
-				${srcset.m ? `<source srcSet=${addWidth(url, srcset.m)} media="(min-width: 740px)"/>` : null}
-				${srcset.s ? `<source srcSet=${addWidth(url, srcset.s)} media="(min-width: 490px)"/>` : null}
+				${srcset.xl ? `<source srcSet=${addWidth(url, srcset.xl)} media="(min-width: 1220px)"/>` : ``}
+				${srcset.l ? `<source srcSet=${addWidth(url, srcset.l)} media="(min-width: 980px)"/>` : ``}
+				${srcset.m ? `<source srcSet=${addWidth(url, srcset.m)} media="(min-width: 740px)"/>` : ``}
+				${srcset.s ? `<source srcSet=${addWidth(url, srcset.s)} media="(min-width: 490px)"/>` : ``}
 				<!--[if IE 9]></video><![endif]-->
 				${srcset.fallback
 					? `<img class="${imgClass}" src=${addWidth(url, srcset.fallback)} alt="${alt}"/>`
