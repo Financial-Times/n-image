@@ -3,7 +3,7 @@ import { buildUrl, addWidth } from '../helpers/';
 
 export default class Image extends Component {
 	render () {
-		const createMarkup = (imgClasses, alt, srcset, rawUrl) => {
+		const createMarkup = (imgClasses, alt, srcset, rawUrl, isImgServiceUrl) => {
 			const url = buildUrl(rawUrl, {}, { isImgServiceUrl });
 			const imgClass = imgClasses.join(' ');
 
