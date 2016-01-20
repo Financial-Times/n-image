@@ -1,13 +1,13 @@
 <picture class="{{#if image.class}}{{image.class}} {{/if}}n-image">
 	<!--[if IE 9]><video style="display: none;"><![endif]-->
 	{{#if image.srcset.xl}}
-		<source srcset="{{#resize image.srcset.xl}}{{{image.url}}}{{/resize}}" media="(min-width: 1210px)">
+		<source srcset="{{#resize image.srcset.xl}}{{{image.url}}}{{/resize}}" media="(min-width: 1220px)">
 	{{/if}}
 	{{#if image.srcset.l}}
-		<source srcset="{{#resize image.srcset.l}}{{{image.url}}}{{/resize}}" media="(min-width: 970px)">
+		<source srcset="{{#resize image.srcset.l}}{{{image.url}}}{{/resize}}" media="(min-width: 980px)">
 	{{/if}}
 	{{#if image.srcset.m}}
-		<source srcset="{{#resize image.srcset.m}}{{{image.url}}}{{/resize}}" media="(min-width: 730px)">
+		<source srcset="{{#resize image.srcset.m}}{{{image.url}}}{{/resize}}" media="(min-width: 740px)">
 	{{/if}}
 	{{#if image.srcset.s}}
 		<source srcset="{{#resize image.srcset.s}}{{{image.url}}}{{/resize}}" media="(min-width: 490px)">
