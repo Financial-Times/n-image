@@ -29,32 +29,32 @@ The following image object is expected by the component (when used as a *bower c
 
 Arguments are passed to the React component (when used as a *node package*) -
 
-```javascript
-<NImage picClass={picClass} imgClass={imgClass} srcset={srcset} url={url} isImgServiceUrl={isImgServiceUrl} alt={alt}/>
+```
+<NImage
+    url="https://ak-hdl.buzzfed.com/static/2014-06/6/12/enhanced/webdr08/enhanced-21313-1402070821-11.jpg"
+    srcset={{ s: 120, l: 160 }}
+    isImgServiceUrl={false}
+    imageServiceParams={{ tint: 'FFF1E0' }}
+    alt="A Cat"
+    picClass="container__picture"
+    imgClass="container__image" />
 ```
 
 The arguments should be of the following format:
 
-```
-picClass: 'any-bespoke-classes you-want-to-add' //Optional added to <picture> element along with n-image
-
-imgClass: 'any-bespoke-classes you-want-to-add' //Optional added to <img> elements along with n-image__img
-
-srcset: {
-	fallback: 500, //Optional pixel width for fallback image.
-	default: 200, //The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
-	s: 300,
-	m: 500,
-	l: 700,
-	xl: 1000
-}
-
-url: 'someurl'
-
-isImgServiceUrl: true //Boolean value dictates whether url will use image service or not
-
-alt: 'your alt text' //Optional alt text
-```
+ * `{string} url`: Image URL
+ * `{Object} srcset`
+  * `{number} srcset.fallback`: Optional pixel width for fallback image.
+  * `{number} srcset.default`: The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
+  *	`{number} srcset.s`
+  * `{number} srcset.m`
+  * `{number} srcset.l`
+  * `{number} srcset.xl`
+ * `{boolean} [isImgServiceUrl=false]`: Boolean value dictates whether url will use image service or not
+ * `{Object} [imageServiceParams={}]`: Params to use with the image services
+ * `{string} [alt='']`: Optional alt text
+ * `{string} [picClass='']`: Any bespoke classes you want to add //Optional added to <picture> element along with n-image
+ * `{string} [imgClass='']`: Any bespoke classes you want to add //Optional added to <img> elements along with n-image__img
 
 The `s`, `m`, `l`, `xl` size match to those used in o-grid and the relevant width images will be loaded.
 

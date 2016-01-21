@@ -3,21 +3,21 @@ import { buildUrl, addWidth } from '../helpers/';
 
 export default class Image extends Component {
 	render () {
-		const createMarkup = (imgClasses, alt, srcset, rawUrl, isImgServiceUrl) => {
-			const url = buildUrl(rawUrl, {}, { isImgServiceUrl });
+		const createMarkup = (url, srcset, { alt = '', isImgServiceUrl = false, imgClasses = [], imageServiceParams = {} }) => {
+			const imageServiceUrl = buildUrl(url, imageServiceParams, { isImgServiceUrl });
 			const imgClass = imgClasses.join(' ');
 
 			return 	{__html:
 				`<!--[if IE 9]><video style="display: none;"><![endif]-->
-				${srcset.xl ? `<source srcSet=${addWidth(url, srcset.xl)} media="(min-width: 1220px)"/>` : ``}
-				${srcset.l ? `<source srcSet=${addWidth(url, srcset.l)} media="(min-width: 980px)"/>` : ``}
-				${srcset.m ? `<source srcSet=${addWidth(url, srcset.m)} media="(min-width: 740px)"/>` : ``}
-				${srcset.s ? `<source srcSet=${addWidth(url, srcset.s)} media="(min-width: 490px)"/>` : ``}
+				${srcset.xl ? `<source srcSet=${addWidth(imageServiceUrl, srcset.xl)} media="(min-width: 1220px)"/>` : ''}
+				${srcset.l ? `<source srcSet=${addWidth(imageServiceUrl, srcset.l)} media="(min-width: 980px)"/>` : ''}
+				${srcset.m ? `<source srcSet=${addWidth(imageServiceUrl, srcset.m)} media="(min-width: 740px)"/>` : ''}
+				${srcset.s ? `<source srcSet=${addWidth(imageServiceUrl, srcset.s)} media="(min-width: 490px)"/>` : ''}
 				<!--[if IE 9]></video><![endif]-->
 				${srcset.fallback
-					? `<img class="${imgClass}" src=${addWidth(url, srcset.fallback)} alt="${alt}"/>`
+					? `<img class="${imgClass}" src=${addWidth(imageServiceUrl, srcset.fallback)} alt="${alt}"/>`
 					: srcset.default
-						? `<img class="${imgClass}" srcSet=${addWidth(url, srcset.default)} alt="${alt}"/>`
+						? `<img class="${imgClass}" srcSet=${addWidth(imageServiceUrl, srcset.default)} alt="${alt}"/>`
 						: `<img class="${imgClass}" alt="${alt}"/>`
 				}`
 			};
@@ -29,17 +29,19 @@ export default class Image extends Component {
 		const imgClasses = ['n-image__img'];
 		if (this.props.imgClass) imgClasses.push(this.props.imgClass);
 
-		const alt = this.props.alt ? this.props.alt : '';
-		const srcset = this.props.srcset;
-		const rawUrl = this.props.url;
-		const isImgServiceUrl = this.props.isImgServiceUrl;
+		const opts = {
+			alt: this.props.alt,
+			isImgServiceUrl: this.props.isImgServiceUrl,
+			imageServiceParams: this.props.imageServiceParams,
+			imgClasses
+		};
 
 		// dangerouslySetInnerHTML is used to render the conditional IE9 comments
 		// Will throw an error if such comments are returned directly
 		return (
 			<picture
 				className={picClasses.join(' ')}
-				dangerouslySetInnerHTML={createMarkup(imgClasses, alt, srcset, rawUrl, isImgServiceUrl)}>
+				dangerouslySetInnerHTML={createMarkup(this.props.url, this.props.srcset, opts)}>
 			</picture>
 		);
 	}
