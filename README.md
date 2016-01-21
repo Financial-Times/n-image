@@ -44,12 +44,12 @@ The arguments should be of the following format:
 
  * `{string} url`: Image URL
  * `{Object} srcset`
-  * `{int} srcset.fallback`: Optional pixel width for fallback image.
-  * `{int} srcset.default`: The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
-  *	`{int} srcset.s`
-  * `{int} srcset.m`
-  * `{int} srcset.l`
-  * `{int} srcset.xl`
+  * `{number} srcset.fallback`: Optional pixel width for fallback image.
+  * `{number} srcset.default`: The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
+  *	`{number} srcset.s`
+  * `{number} srcset.m`
+  * `{number} srcset.l`
+  * `{number} srcset.xl`
  * `{boolean} [isImgServiceUrl=false]`: Boolean value dictates whether url will use image service or not
  * `{Object} [imageServiceParams={}]`: Params to use with the image services
  * `{string} [alt='']`: Optional alt text
