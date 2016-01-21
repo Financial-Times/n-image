@@ -51,6 +51,7 @@ The arguments should be of the following format:
   * `{int} srcset.l`
   * `{int} srcset.xl`
  * `{boolean} [isImgServiceUrl=false]`: Boolean value dictates whether url will use image service or not
+ * `{Object} [imageServiceParams={}]`: Params to use with the image services
  * `{string} [alt='']`: Optional alt text
  * `{string} [picClass='']`: Any bespoke classes you want to add //Optional added to <picture> element along with n-image
  * `{string} [imgClass='']`: Any bespoke classes you want to add //Optional added to <img> elements along with n-image__img
