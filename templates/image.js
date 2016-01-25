@@ -9,15 +9,15 @@ export default class Image extends Component {
 
 			return 	{__html:
 				`<!--[if IE 9]><video style="display: none;"><![endif]-->
-				${srcset.xl ? `<source srcSet=${addWidth(imageServiceUrl, srcset.xl)} media="(min-width: 1220px)"/>` : ''}
-				${srcset.l ? `<source srcSet=${addWidth(imageServiceUrl, srcset.l)} media="(min-width: 980px)"/>` : ''}
-				${srcset.m ? `<source srcSet=${addWidth(imageServiceUrl, srcset.m)} media="(min-width: 740px)"/>` : ''}
-				${srcset.s ? `<source srcSet=${addWidth(imageServiceUrl, srcset.s)} media="(min-width: 490px)"/>` : ''}
+				${srcset.xl ? `<source srcSet="${addWidth(imageServiceUrl, srcset.xl)}" media="(min-width: 1220px)"/>` : ''}
+				${srcset.l ? `<source srcSet="${addWidth(imageServiceUrl, srcset.l)}" media="(min-width: 980px)"/>` : ''}
+				${srcset.m ? `<source srcSet="${addWidth(imageServiceUrl, srcset.m)}" media="(min-width: 740px)"/>` : ''}
+				${srcset.s ? `<source srcSet="${addWidth(imageServiceUrl, srcset.s)}" media="(min-width: 490px)"/>` : ''}
 				<!--[if IE 9]></video><![endif]-->
 				${srcset.fallback
-					? `<img class="${imgClass}" src=${addWidth(imageServiceUrl, srcset.fallback)} alt="${alt}"/>`
+					? `<img class="${imgClass}" src="${addWidth(imageServiceUrl, srcset.fallback)}" alt="${alt}"/>`
 					: srcset.default
-						? `<img class="${imgClass}" srcSet=${addWidth(imageServiceUrl, srcset.default)} alt="${alt}"/>`
+						? `<img class="${imgClass}" srcSet="${addWidth(imageServiceUrl, srcset.default)}" alt="${alt}"/>`
 						: `<img class="${imgClass}" alt="${alt}"/>`
 				}`
 			};
