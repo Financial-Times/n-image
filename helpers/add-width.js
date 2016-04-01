@@ -1,3 +1,1 @@
-export default (url, width) => {
-	return `${url}&width=${width}`;
-}
+export default (url, width) => `${url}&width=${width}`;
