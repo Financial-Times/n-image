@@ -7,14 +7,12 @@
   "description": "Responsive image component for next",
   "main": [
     "main.scss",
-    "./templates/image.js"
+    "main.js"
   ],
   "license": "MIT",
   "ignore": [
     "**/.*",
+    "demos"
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
   ]
 }

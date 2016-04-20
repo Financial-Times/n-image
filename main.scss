@@ -1,7 +1,6 @@
 $_n-image_applied: false !default;
 
 @if (not $_n-image_applied) {
-
 	.n-image {
 		max-width: 100%;
 	}
@@ -11,5 +10,4 @@ $_n-image_applied: false !default;
 	}
 
 	$_n-image_applied: true !global;
-
 }

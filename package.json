@@ -1,9 +1,12 @@
 {
-  "name": "n-image",
+  "name": "@financial-times/n-image",
   "description": "Next responsive image component",
   "version": "2.2.3",
-  "main": "./templates/image.js",
+  "main": "main.js",
   "devDependencies": {
-    "next-build-tools": "^5.15.0"
+    "n-heroku-tools": "^6.1.1"
+  },
+  "dependencies": {
+    "origami-build-tools": "^5.1.0"
   }
 }
