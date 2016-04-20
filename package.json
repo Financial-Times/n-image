@@ -4,9 +4,10 @@
   "version": "2.2.3",
   "main": "main.js",
   "devDependencies": {
-    "n-heroku-tools": "^6.1.1"
+    "@financial-times/n-heroku-tools": "^6.1.1",
+    "origami-build-tools": "^5.1.0"
   },
   "dependencies": {
-    "origami-build-tools": "^5.1.0"
+    "react": "^15.0.1"
   }
 }

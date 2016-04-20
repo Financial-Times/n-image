@@ -1,6 +1,6 @@
 import qs from 'querystring';
 
-export default (url, params = {}, { isImgServiceUrl = false }) => {
+export default (url, params = {}, { isImgServiceUrl = false } = {}) => {
 	const defaultOptions = {
 		source: 'next',
 		fit: 'scale-down',
@@ -12,4 +12,4 @@ export default (url, params = {}, { isImgServiceUrl = false }) => {
 	}
 
 	return url += `?${qs.stringify(options)}`;
-}
+};
