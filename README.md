@@ -1,4 +1,4 @@
-#  N Image [![Circle CI](https://circleci.com/gh/Financial-Times/n-image.svg?style=svg)](https://circleci.com/gh/Financial-Times/n-image)
+#  N-Image [![Circle CI](https://circleci.com/gh/Financial-Times/n-image.svg?style=svg)](https://circleci.com/gh/Financial-Times/n-image)
 
 Bower component/Node module for responsive images.
 
