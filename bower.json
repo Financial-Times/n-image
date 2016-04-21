@@ -11,7 +11,13 @@
   ],
   "license": "MIT",
   "ignore": [
-    "tests",
-    "node_modules"
+    ".gitignore",
+    "circle.yml",
+    "ft.yml",
+    "Makefile",
+    "n.Makefile",
+    "node_modules",
+    "package.json",
+    "tests"
   ]
 }

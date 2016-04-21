@@ -3,6 +3,14 @@
 .eslintrc.js
 .scss-lint.yml
 
+bower.json
+circle.yml
+ft.yml
+n.Makefile
+Makefile
+main.scss
+
 /.idea/
 /.sass-cache/
 /node_modules/
+/tests/
