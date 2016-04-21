@@ -1,7 +1,6 @@
-install:
-	obt install --verbose
+include n.Makefile
 
-verify:
-	nbt verify --skip-layout-checks --skip-dotenv-check
+unit-test:
+	mocha --require tests/setup --recursive --reporter spec tests
 
-test: verify
+test: verify unit-test

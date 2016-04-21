@@ -1,8 +1,0 @@
-sudo: false
-language: node_js
-node_js:
-- '4.2.1'
-install:
-- npm install origami-build-tools && make install
-script:
-- make install && make test

@@ -1,9 +1,23 @@
 {
-  "name": "n-image",
+  "name": "@financial-times/n-image",
   "description": "Next responsive image component",
   "version": "2.2.3",
-  "main": "./templates/image.js",
+  "repository": "Financial-Times/n-image",
+  "main": "main.js",
   "devDependencies": {
-    "next-build-tools": "^5.15.0"
+    "@financial-times/n-heroku-tools": "^6.1.1",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-register": "^6.7.2",
+    "bower": "^1.7.9",
+    "chai": "^3.5.0",
+    "eslint": "^2.8.0",
+    "eslint-plugin-react": "^5.0.1",
+    "lintspaces-cli": "^0.1.1",
+    "mocha": "^2.4.5",
+    "react-addons-test-utils": "^15.0.1"
+  },
+  "dependencies": {
+    "react": "^15.0.1"
   }
 }

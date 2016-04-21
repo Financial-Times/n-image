@@ -1,4 +1,4 @@
-import buildUrl from '../helpers/build-url';
-import addWidth from '../helpers/add-width';
+import breakpoints from '../helpers/breakpoints';
+import buildImageServiceUrl from '../helpers/build-image-service-url';
 
-export {buildUrl, addWidth};
+export { breakpoints, buildImageServiceUrl };
