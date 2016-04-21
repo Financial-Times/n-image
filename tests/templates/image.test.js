@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import chai from 'chai';
 chai.should();
