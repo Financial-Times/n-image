@@ -1,7 +1,6 @@
-n-image [![Build Status](https://travis-ci.org/Financial-Times/n-image.svg?branch=master)](https://travis-ci.org/Financial-Times/n-image)
-=================
+#  N Image [![Build Status](https://travis-ci.org/Financial-Times/n-image.svg?branch=master)](https://travis-ci.org/Financial-Times/n-image)
 
-Bower component for responsive images.
+Bower component/Node module for responsive images.
 
 NOTE: This implementation is likely to change as we discover more scenarios that need to be covered by responsive images.
 

@@ -5,3 +5,7 @@
 /build/
 /demos/local
 /node_modules/
+
+.editorconfig
+.eslintrc.js
+.scss-lint.yml

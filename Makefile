@@ -1,7 +1,9 @@
-install:
-	obt install --verbose
+include n.Makefile
 
-verify:
-	obt verify
+unit-test:
+	mocha --require tests/setup --recursive --reporter spec tests
 
-test: verify
+test: verify unit-test
+
+demo:
+	obt demo

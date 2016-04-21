@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
 
-import { breakpoints, buildUrl } from '../helpers';
-
-const createUrl = (template, params = {}) =>
-	Object.keys(params)
-		.reduce((url, param) => url.replace(new RegExp(`{${param}}`, 'g'), params[param]), template);
+import { breakpoints, buildImageServiceUrl } from '../helpers';
 
 /**
  * @param {string} url - URL of the image
  * @param {number[]} widths - Widths of the image, in pixels
- * @param {Object} sizes - Keys are breakpoints, values the length. e.g.
+ * @param {Object} [sizes = {}] - Keys are breakpoints, values the length. e.g.
  * { default: '33.3vw', L: 'calc(.333 * (100vw - 12em)'}
  * @param {string} [urlTemplate] - If supplied, use to construct the image url but replacing instances of `{width}` and
  * `{url}` with the values in the srcset
+ * @param {string[]|string} [classes = []] - Additional classes to add to the element
+ * @param {string} [alt = ''] - Alt text for the image
  */
 export default class extends Component {
 	render () {
-		const url = this.props.url;
-
+		const sizes = this.props.sizes || {};
+		const className = ['n-image']
+			.concat(this.props.classes || [])
+			.join(' ');
 		const srcset = this.props.widths
-			.map(width => `${buildUrl(url, { width })} ${width}w`)
+			.map(width => `${buildImageServiceUrl(this.props.url, { width })} ${width}w`)
 			.join(', ');
-		const sizes = breakpoints
-			.reverse()
+		const imgSizes = breakpoints
 			.map(breakpoint => {
-				const size = this.props.sizes[breakpoint.name];
+				const size = sizes[breakpoint.name];
 				if (size) {
 					return breakpoint.name === 'default' ? size : `(min-width: ${breakpoint.px}px) ${size}`;
 				} else {
@@ -34,6 +33,6 @@ export default class extends Component {
 			.filter(size => size)
 			.join(', ');
 
-		return <img className="n-image__img" srcSet={srcset} sizes={sizes} />;
+		return <img className={className} srcSet={srcset} sizes={imgSizes} alt={this.props.alt || ''}/>;
 	}
 };

@@ -1,47 +1,72 @@
 import React, { Component } from 'react';
-import { buildUrl, addWidth } from '../helpers/';
 
+import { breakpoints } from '../helpers/';
+
+const createImg = attrs => {
+	const attrsStringified = Object.keys(attrs)
+		.map(attrName => `${attrName}="${attrs[attrName]}"`)
+		.join(' ');
+	return `<img ${attrsStringified} />`
+};
+
+const createSources = (urls, { alt = '', classes = [], withFallback = false }) => {
+	const className = classes.join(' ');
+	let sources = breakpoints
+		.filter(breakpoint => breakpoint.name !== 'default')
+		.map(breakpoint => {
+			const url = urls[breakpoint.name];
+			return url ? `<source srcset="${url}" media="(min-width: ${breakpoint.px}px)" />` : null
+		})
+		.filter(source => source);
+	if (sources.length) {
+		sources = ['<!--[if IE 9]><video style="display: none;"><![endif]-->']
+			.concat(sources, '<!--[if IE 9]></video><![endif]-->');
+	}
+
+	const imgAttrs = {
+		'class': className,
+		alt
+	};
+
+	if (urls.default) {
+		const defaultSrc = urls.default;
+		if (withFallback) {
+			imgAttrs.src = defaultSrc;
+		} else {
+			imgAttrs.srcset = defaultSrc;
+		}
+	}
+
+	return sources
+		.concat(createImg(imgAttrs))
+		.join('');
+};
+/**
+ * @param {Object} urls - URLs of the image to use at different breakpoints. Key is the breakpoint, value the URL,
+ * e.g. { default: 'some/image.jpg', L: 'another/image.jpg' }
+ * @param {boolean} [withFallback = false] - Render a 'fallback' image, in the `default` size i.e. for browsers that
+ * don't support the picture element
+ * @param {string[]|string} [classes = []] - Additional classes to add to the `picture` element
+ * @param {string[]|string} [imgClasses = []] - Additional classes to add to the `img` element
+ * @param {string} [alt = ''] - Alt text for the image
+ */
 export default class extends Component {
 	render () {
-		const createMarkup = (url, srcset, { alt = '', isImgServiceUrl = false, imgClasses = [], imageServiceParams = {} }) => {
-			const imageServiceUrl = buildUrl(url, imageServiceParams, { isImgServiceUrl });
-			const imgClass = imgClasses.join(' ');
-
-			return 	{__html:
-				`<!--[if IE 9]><video style="display: none;"><![endif]-->
-				${srcset.xl ? `<source srcset="${addWidth(imageServiceUrl, srcset.xl)}" media="(min-width: 1220px)"/>` : ''}
-				${srcset.l ? `<source srcset="${addWidth(imageServiceUrl, srcset.l)}" media="(min-width: 980px)"/>` : ''}
-				${srcset.m ? `<source srcset="${addWidth(imageServiceUrl, srcset.m)}" media="(min-width: 740px)"/>` : ''}
-				${srcset.s ? `<source srcset="${addWidth(imageServiceUrl, srcset.s)}" media="(min-width: 490px)"/>` : ''}
-				<!--[if IE 9]></video><![endif]-->
-				${srcset.fallback
-					? `<img class="${imgClass}" src="${addWidth(imageServiceUrl, srcset.fallback)}" alt="${alt}"/>`
-					: srcset.default
-						? `<img class="${imgClass}" srcset="${addWidth(imageServiceUrl, srcset.default)}" alt="${alt}"/>`
-						: `<img class="${imgClass}" alt="${alt}"/>`
-				}`
-			};
-		};
-
-		const picClasses = ['n-image'];
-		if (this.props.picClass) picClasses.push(this.props.picClass);
-
-		const imgClasses = ['n-image__img'];
-		if (this.props.imgClass) imgClasses.push(this.props.imgClass);
-
+		const classes = ['n-image'].concat(this.props.classes || []).join(' ');
+		const imgClasses = ['n-image__img'].concat(this.props.imgClasses || []);
 		const opts = {
 			alt: this.props.alt,
-			isImgServiceUrl: this.props.isImgServiceUrl,
-			imageServiceParams: this.props.imageServiceParams,
-			imgClasses
+			classes: imgClasses,
+			withFallback: this.props.withFallback
 		};
+
 
 		// dangerouslySetInnerHTML is used to render the conditional IE9 comments
 		// Will throw an error if such comments are returned directly
 		return (
 			<picture
-				className={picClasses.join(' ')}
-				dangerouslySetInnerHTML={createMarkup(this.props.url, this.props.srcset, opts)}>
+				className={classes}
+				dangerouslySetInnerHTML={{__html: createSources(this.props.urls, opts)}}>
 			</picture>
 		);
 	}
