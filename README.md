@@ -60,3 +60,11 @@ Renders as
 ```
 
 See [the source](./templates/picture.js) for properties the React element accepts
+
+### CSS
+
+A very minimal SASS file is available
+
+```
+@import 'n-image/main';
+```
