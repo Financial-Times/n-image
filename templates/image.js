@@ -7,8 +7,6 @@ import { breakpoints, buildImageServiceUrl } from '../helpers';
  * @param {number[]} widths - Widths of the image, in pixels
  * @param {Object} [sizes = {}] - Keys are breakpoints, values the length. e.g.
  * { default: '33.3vw', L: 'calc(.333 * (100vw - 12em)'}
- * @param {string} [urlTemplate] - If supplied, use to construct the image url but replacing instances of `{width}` and
- * `{url}` with the values in the srcset
  * @param {string[]|string} [classes = []] - Additional classes to add to the element
  * @param {string} [alt = ''] - Alt text for the image
  */

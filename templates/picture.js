@@ -41,6 +41,7 @@ const createSources = (urls, { alt = '', classes = [], withFallback = false }) =
 		.concat(createImg(imgAttrs))
 		.join('');
 };
+
 /**
  * @param {Object} urls - URLs of the image to use at different breakpoints. Key is the breakpoint, value the URL,
  * e.g. { default: 'some/image.jpg', L: 'another/image.jpg' }

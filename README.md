@@ -1,102 +1,62 @@
-#  N Image [![Build Status](https://travis-ci.org/Financial-Times/n-image.svg?branch=master)](https://travis-ci.org/Financial-Times/n-image)
+#  N Image [![Circle CI](https://circleci.com/gh/Financial-Times/n-image.svg?style=svg)](https://circleci.com/gh/Financial-Times/n-image)
 
 Bower component/Node module for responsive images.
 
-NOTE: This implementation is likely to change as we discover more scenarios that need to be covered by responsive images.
-
 ## Usage
 
-The image component allows you to specify different size images to be used at different breakpoints. It's essentially a wrapper around the new `<picture></picture>` element. Currently we're using the latest version of picturefill to polyfill the picture element for older browsers. This will be removed when a picture polyfill is added to the polyfill service in the near future.
+There are two ways of rendering responsive images; a `srcset` and `sizes` attribute on the existing `img` element, or with the new `picture` element.
 
-The following image object is expected by the component (when used as a *bower component*) -
+### `srcset` and `sizes` Attributes
 
-```javascript
-{
-	url: 'someurl', //This will be passed into the image service
-	alt: 'your alt text',
-	class: 'any-bespoke-classes you-want-to-add', //Optional added to <picture> element along with n-image
-	srcset: {
-		fallback: 500, //Optional pixel width for fallback image.
-		default: 200, //The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
-		s: 300,
-		m: 500,
-		l: 700,
-		xl: 1000
-	}
-}
-```
-
-Arguments are passed to the React component (when used as a *node package*) -
+The srcset and sizes syntaxes are used to provide the browser with a list of image sources that are identical apart from their size.
 
 ```
-<NImage
-    url="https://ak-hdl.buzzfed.com/static/2014-06/6/12/enhanced/webdr08/enhanced-21313-1402070821-11.jpg"
-    srcset={{ s: 120, l: 160 }}
-    isImgServiceUrl={false}
-    imageServiceParams={{ tint: 'FFF1E0' }}
-    alt="A Cat"
-    picClass="container__picture"
-    imgClass="container__image" />
+import Image form '@financial-times/n-image';
+
+<Image 
+    url="an/image.jpg" 
+    widths={[100, 200]} 
+    sizes={{ default: '100vw', XL: '100vw * 0.5' }}
+    classes={['a-class', 'another-class']}
+    alt="A useful description"  />
 ```
 
-The arguments should be of the following format:
-
- * `{string} url`: Image URL
- * `{Object} srcset`
-  * `{number} srcset.fallback`: Optional pixel width for fallback image.
-  * `{number} srcset.default`: The default image size. This will be shown if non of the breakpoint sizes are matched or some haven't been specified
-  *	`{number} srcset.s`
-  * `{number} srcset.m`
-  * `{number} srcset.l`
-  * `{number} srcset.xl`
- * `{boolean} [isImgServiceUrl=false]`: Boolean value dictates whether url will use image service or not
- * `{Object} [imageServiceParams={}]`: Params to use with the image services
- * `{string} [alt='']`: Optional alt text
- * `{string} [picClass='']`: Any bespoke classes you want to add //Optional added to <picture> element along with n-image
- * `{string} [imgClass='']`: Any bespoke classes you want to add //Optional added to <img> elements along with n-image__img
-
-The `s`, `m`, `l`, `xl` size match to those used in o-grid and the relevant width images will be loaded.
-
-The `fallback` property should only be included if the image must be shown in all scenarios. The suggested usage of picturefill is that browsers without picture support or javascript should only show the alt text. Including the `fallback` will result in a double image download in certain scenarios and so should only be used when required.
-
-A breakpoint definition will always trump the default declaration. For example with the following options -
-
-```javascript
-{
-	url: 'someurl', //This will be passed into the image service
-	alt: 'your alt text',
-	srcset: {
-		default: 400,
-		l: 700
-	}
-}
-```
-A `400px` image will be shown until you hit the `l` breakpoint. At which point a `700px` image will be shown.
-
-In certain scenarios, images may only be required for larger breakpoint sizes. In this case you can drop the `default` and `s` options. You will still need to `display:none` the picture element at the `s` breakpoint but it means no image will be requested.
-
-###Installing
+Renders as
 
 ```
-make install
+<img 
+    class="n-image a-class another-class"
+    alt="A useful description"
+    sizes="(min-width: 1220px) 100vw * 0.5, 100vw"
+    srcset="https://next-geebee.ft.com/image/v1/images/raw/an%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=100 100w,
+            https://next-geebee.ft.com/image/v1/images/raw/an%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=200 200w" />
 ```
 
-###Using
+See [the source](./templates/image.js) for properties the React element accepts
 
-####JS:
-```
-	require('n-image');
-```
+### `picture` Element
 
-####SCSS:
-`@import 'n-image/main';`
-
-####HTML:
+The `picture` element is used when you need explicit control over which source is shown at set viewport sizes, i.e. images of different crops, zoom levels or aspect ratios are displayed at different breakpoints
 
 ```
-{{>n-image/templates/image}}
+import Picture form '@financial-times/n-image';
+
+<Picture 
+    urls={{ default: 'an/image.jpg', XL: 'another/image.jpg }} 
+    classes={['picture-class']} 
+    imgClasses={['img-class', 'another-img-class']} 
+    alt="A useful description" />
 ```
 
-### Testing
+Renders as
 
-Use the [Next Styleguide Demoer](https://github.com/Financial-Times/next-style-guide-demoer) to test, by `bower link`-ing this component into it and updating [the data json file](./demos/data.json) with any extra variants.
+```
+<picture class="n-image picture-class">
+    <!--[if IE 9]><video style="display: none;"><![endif]-->
+    <source srcset="an/image.jpg" media="(min-width: 1220px)" />
+	<!--[if IE 9]></video><![endif]-->
+	<img class="n-image__img img-class another-img-class" alt="A useful description" srcset="an/image.jpg" />
+</picture>
+```
+
+See [the source](./templates/picture.js) for properties the React element accepts
