@@ -11,8 +11,7 @@
   ],
   "license": "MIT",
   "ignore": [
-    "build",
-    "demos",
+    "tests",
     "node_modules"
   ]
 }

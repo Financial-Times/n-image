@@ -15,7 +15,6 @@
     "eslint-plugin-react": "^5.0.1",
     "lintspaces-cli": "^0.1.1",
     "mocha": "^2.4.5",
-    "origami-build-tools": "^5.1.0",
     "react-addons-test-utils": "^15.0.1"
   },
   "dependencies": {

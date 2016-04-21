@@ -2,8 +2,6 @@
 
 /.idea/
 /.sass-cache/
-/build/
-/demos/local
 /node_modules/
 
 .editorconfig
