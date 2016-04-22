@@ -11,7 +11,7 @@ There are two ways of rendering responsive images; a `srcset` and `sizes` attrib
 The srcset and sizes syntaxes are used to provide the browser with a list of image sources that are identical apart from their size. e.g.
 
 ```
-import { Image } form '@financial-times/n-image';
+import { Image } from '@financial-times/n-image';
 
 <Image
     url="an/image.jpg"
@@ -39,7 +39,7 @@ See [the source](./templates/image.js) for properties the React element accepts
 The `picture` element is used when you need explicit control over which source is shown at set viewport sizes, i.e. images of different crops, zoom levels or aspect ratios are displayed at different breakpoints. e.g.
 
 ```
-import { Picture } form '@financial-times/n-image';
+import { Picture } from '@financial-times/n-image';
 
 <Picture
     urls={{ default: 'an/image.jpg', XL: 'another/image.jpg }}
