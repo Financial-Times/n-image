@@ -38,8 +38,8 @@ describe('Image', () => {
 	it('should output correct multiple srcset', () => {
 		const image = <Image url="example/image.jpg" widths={[100, 200]} />;
 		renderComponent(image).props.srcSet.should.equal(
-			'https://next-geebee.ft.com/image/v1/images/raw/example%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=100 100w, ' +
-			'https://next-geebee.ft.com/image/v1/images/raw/example%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=200 200w'
+			'https://next-geebee.ft.com/image/v1/images/raw/example%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=200 200w, ' +
+			'https://next-geebee.ft.com/image/v1/images/raw/example%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=100 100w'
 		);
 	});
 

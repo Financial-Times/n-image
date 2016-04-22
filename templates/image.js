@@ -17,6 +17,7 @@ export default class extends Component {
 			.concat(this.props.classes || [])
 			.join(' ');
 		const srcset = this.props.widths
+			.sort((widthOne, widthTwo) => widthTwo - widthOne)
 			.map(width => `${buildImageServiceUrl(this.props.url, { width })} ${width}w`)
 			.join(', ');
 		const imgSizes = breakpoints
