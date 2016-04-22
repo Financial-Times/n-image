@@ -12,6 +12,7 @@
   "license": "MIT",
   "ignore": [
     ".gitignore",
+    ".npmignore",
     "circle.yml",
     "ft.yml",
     "Makefile",
