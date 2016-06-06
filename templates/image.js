@@ -10,7 +10,7 @@ const dataify = obj =>
 		);
 
 /**
- * @param {string} src - Actually src to use. If set, assume it's non-responsive, i.e. ignore url, widths, sizes
+ * @param {string} src - Actual src to use. If set, assume it's non-responsive, i.e. ignore url, widths, sizes
  * @param {string} url - URL of the image
  * @param {number[]} widths - Widths of the image, in pixels
  * @param {Object} [sizes = {}] - Keys are breakpoints, values the length. e.g.
