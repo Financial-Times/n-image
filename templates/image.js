@@ -42,11 +42,9 @@ export default class extends Component {
 			attrs.sizes = breakpoints
 				.map(breakpoint => {
 					const size = sizes[breakpoint.name];
-					if (size) {
-						return breakpoint.name === 'default' ? size : `(min-width: ${breakpoint.px}px) ${size}`;
-					} else {
-						return null;
-					}
+					return size ?
+						breakpoint.name === 'default' ? size : `(min-width: ${breakpoint.px}px) ${size}` :
+						null;
 				})
 				.filter(size => size)
 				.join(', ');
