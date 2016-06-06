@@ -5,8 +5,11 @@ import { breakpoints, buildImageServiceUrl } from '../helpers';
 // append 'data-' to object's keys
 const dataify = obj =>
 	Object.keys(obj)
-		.reduce((name, dataObj) =>
-			Object.assign(dataObj, { [`data-${name}`]: obj[name] }), {}
+		.reduce((dataObj, name) => {
+				const dataAttrName = `data-img-${name === 'className' ? 'class' : name.toLocaleLowerCase()}`;
+				return Object.assign(dataObj, { [dataAttrName]: obj[name] });
+			},
+			{}
 		);
 
 /**
