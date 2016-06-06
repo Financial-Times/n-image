@@ -6,11 +6,9 @@ import { breakpoints, buildImageServiceUrl } from '../helpers';
 const dataify = obj =>
 	Object.keys(obj)
 		.reduce((dataObj, name) => {
-				const dataAttrName = `data-img-${name === 'className' ? 'class' : name.toLocaleLowerCase()}`;
-				return Object.assign(dataObj, { [dataAttrName]: obj[name] });
-			},
-			{}
-		);
+			const dataAttrName = `data-img-${name === 'className' ? 'class' : name.toLocaleLowerCase()}`;
+			return Object.assign(dataObj, { [dataAttrName]: obj[name] });
+		}, {});
 
 /**
  * @param {string} src - Actual src to use. If set, assume it's non-responsive, i.e. ignore url, widths, sizes
