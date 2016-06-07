@@ -3,7 +3,7 @@ import ReactTestUtils from 'react-addons-test-utils';
 import chai from 'chai';
 chai.should();
 
-import Image from '../../templates/image';
+import Image from '../../components/image';
 
 const renderComponent = component => {
 	const shallowRenderer = ReactTestUtils.createRenderer();
