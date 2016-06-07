@@ -18,11 +18,12 @@ const loadImage = img => {
 	imagesLoaded(img, imageHasLoaded);
 };
 
-const intersectionCallback = changes => {
+// NOTE: `function` syntax, so maintains `this`
+const intersectionCallback = function (changes) {
 	changes.forEach(change => {
 		const observedImg = change.target;
 		loadImage(observedImg)
-		observer.unobserve(observedImg);
+		this.unobserve(observedImg);
 	});
 };
 
