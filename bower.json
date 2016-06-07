@@ -7,18 +7,21 @@
   "description": "Responsive image component for next",
   "main": [
     "main.scss",
-    "main.js"
+    "main-client.js"
   ],
   "license": "MIT",
   "ignore": [
+    "tests",
     ".gitignore",
     ".npmignore",
     "circle.yml",
     "ft.yml",
+    "main-server.js",
     "Makefile",
     "n.Makefile",
-    "node_modules",
-    "package.json",
-    "tests"
-  ]
+    "package.json"
+  ],
+  "dependencies": {
+    "imagesloaded": "^4.1.0"
+  }
 }

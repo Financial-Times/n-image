@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
-import { breakpoints, buildImageServiceUrl } from '../helpers';
+import { breakpoints, buildImageServiceUrl } from '../src/helpers';
 
-// append 'data-' to object's keys
-const dataify = obj =>
+// convert the `src` or `srcset` attribtues to a data attribute
+const hideImage = obj =>
 	Object.keys(obj)
 		.reduce((dataObj, name) => {
-			const dataAttrName = `data-img-${name === 'className' ? 'class' : name.toLocaleLowerCase()}`;
-			return Object.assign(dataObj, { [dataAttrName]: obj[name] });
+			if (name === 'src' || name === 'srcSet') {
+				dataObj[`data-${name.toLowerCase()}`] = obj[name];
+			} else {
+				dataObj[name] = obj[name];
+			}
+			return dataObj;
 		}, {});
 
 /**
@@ -50,12 +54,16 @@ export default class extends Component {
 				.filter(size => size)
 				.join(', ');
 		}
-		const img = <img {...attrs} />;
+		const hideImageAttrs = hideImage(attrs);
+		hideImageAttrs.className += ' n-image--loading';
 
 		return image.lazyLoad ?
-			<noscript className="n-image--lazy-loader" {...dataify(attrs)}>
-				{img}
-			</noscript> :
-			img;
+			<div className="n-image--lazy-loader">
+				<img {...hideImageAttrs} />
+				<noscript>
+					<img {...attrs} />
+				</noscript>
+			</div> :
+			<img {...attrs} />;
 	}
 };
