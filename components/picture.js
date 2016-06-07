@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { breakpoints } from '../helpers/';
+import { breakpoints } from '../src/helpers/';
 
 const createImg = attrs => {
 	const attrsStringified = Object.keys(attrs)

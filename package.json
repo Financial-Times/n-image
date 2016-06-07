@@ -3,7 +3,7 @@
   "description": "Next responsive image component",
   "version": "3.1.1",
   "repository": "Financial-Times/n-image",
-  "main": "main.js",
+  "main": "main-server.js",
   "license": "MIT",
   "devDependencies": {
     "@financial-times/n-heroku-tools": "^6.1.1",
@@ -19,6 +19,7 @@
     "react-addons-test-utils": "^15.0.1"
   },
   "dependencies": {
+    "imagesloaded": "^4.1.0",
     "react": "^15.0.1"
   }
 }
