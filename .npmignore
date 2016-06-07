@@ -1,7 +1,6 @@
 /.idea/
 /.sass-cache/
 /bower_components/
-/node_modules/
 /tests/
 
 .DS_Store
