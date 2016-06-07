@@ -6,10 +6,12 @@
 .DS_Store
 .editorconfig
 .eslintrc.js
+.gitignore
 .scss-lint.yml
 bower.json
 circle.yml
 ft.yml
-n.Makefile
-Makefile
+main-client.js
 main.scss
+Makefile
+n.Makefile

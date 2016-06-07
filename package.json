@@ -19,7 +19,6 @@
     "react-addons-test-utils": "^15.0.1"
   },
   "dependencies": {
-    "imagesloaded": "^4.1.0",
     "react": "^15.0.1"
   }
 }

@@ -19,10 +19,10 @@ const loadImage = img => {
 };
 
 const intersectionCallback = changes => {
-    changes.forEach(change => {
-    	const observedImg = change.target;
-    	loadImage(observedImg)
-    	observer.unobserve(observedImg);
+	changes.forEach(change => {
+		const observedImg = change.target;
+		loadImage(observedImg)
+		observer.unobserve(observedImg);
 	});
 };
 

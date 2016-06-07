@@ -11,14 +11,18 @@
   ],
   "license": "MIT",
   "ignore": [
+    "node_modules",
+    "tests",
     ".gitignore",
     ".npmignore",
     "circle.yml",
     "ft.yml",
+    "main-server.js",
     "Makefile",
     "n.Makefile",
-    "node_modules",
-    "package.json",
-    "tests"
-  ]
+    "package.json"
+  ],
+  "dependencies": {
+    "imagesloaded": "^4.1.0"
+  }
 }
