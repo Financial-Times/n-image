@@ -1,4 +1,4 @@
-import imagesLoaded from 'imagesLoaded';
+import imagesLoaded from 'imagesloaded';
 
 const lazyLoaderClass = 'n-image--lazy-loader';
 const imageLoadingClass = 'n-image--loading';
