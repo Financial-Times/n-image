@@ -58,7 +58,7 @@ export default class extends Component {
 		hideImageAttrs.className += ' n-image--lazy-loading';
 
 		return image.lazyLoad ?
-			<div className="n-image--lazy-loader">
+			<div className="n-image-lazy-loader">
 				<img {...hideImageAttrs} />
 				<noscript>
 					<img {...attrs} />
