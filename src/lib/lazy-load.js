@@ -29,7 +29,7 @@ const intersectionCallback = function (changes) {
 };
 
 const observeIntersection = img => {
-	if (IntersectionObserver) {
+	if (window.IntersectionObserver) {
 		const observer = new IntersectionObserver(
 			intersectionCallback,
 			{ rootMargin: '0px' }
