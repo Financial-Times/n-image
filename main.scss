@@ -7,7 +7,7 @@ $_n-image_applied: false !default;
 		transition: opacity 1s;
 	}
 
-	.n-image--loading {
+	.n-image--lazy-loading {
 		width: 100%;
 		opacity: 0;
 	}
