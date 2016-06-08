@@ -1,10 +1,11 @@
 import imagesLoaded from 'imagesloaded';
 
-const lazyLoaderClass = 'n-image--lazy-loader';
-const imageLoadingClass = 'n-image--loading';
+const lazyLoaderClass = 'n-image-lazy-loader';
+const imageClass = 'n-image';
+const imageLazyLoadingClass = 'n-image--lazy-loading';
 
 const imageHasLoaded = instance =>
-	instance.elements.forEach(img => img.classList.remove(imageLoadingClass))
+	instance.elements.forEach(img => img.classList.remove(imageLazyLoadingClass))
 
 const loadImage = img => {
 	// add the src/srcset attribtues back in
@@ -40,7 +41,7 @@ const observeIntersection = img => {
 };
 
 const lazyLoad = () => {
-	[...document.querySelectorAll(`.${lazyLoaderClass} .n-image`)]
+	[...document.querySelectorAll(`.${lazyLoaderClass} .${imageClass}`)]
 		.forEach(observeIntersection);
 };
 
