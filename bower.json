@@ -22,6 +22,7 @@
     "package.json"
   ],
   "dependencies": {
-    "imagesloaded": "^4.1.0"
+    "imagesloaded": "^4.1.0",
+    "n-ui": "^1.10.5"
   }
 }
