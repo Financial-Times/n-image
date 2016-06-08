@@ -2,17 +2,18 @@ $_n-image_applied: false !default;
 
 @if $_n-image_applied == false {
 	.n-image {
-		width: 100%;
+		max-width: 100%;
 		opacity: 1;
 		transition: opacity 1s;
 	}
 
 	.n-image--loading {
+		width: 100%;
 		opacity: 0;
 	}
 
 	.n-image__img {
-		width: 100%;
+		max-width: 100%;
 	}
 
 	$_n-image_applied: true !global;
