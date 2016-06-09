@@ -1,5 +1,7 @@
 import imagesLoaded from 'imagesloaded';
 
+const lazyLoaderClass = 'n-image-lazy-loader';
+const imageClass = 'n-image';
 const imageLazyLoadingClass = 'n-image--lazy-loading';
 
 const imageHasLoaded = instance =>
@@ -45,7 +47,7 @@ const observeIntersection = (opts, img) => {
 };
 
 const lazyLoad = (opts = { dontFade: false }) => {
-	[...document.querySelectorAll(`.${imageLazyLoadingClass}`)]
+	[...document.querySelectorAll(`.${lazyLoaderClass} .${imageClass}`)]
 		.forEach(observeIntersection.bind(null, opts));
 };
 
