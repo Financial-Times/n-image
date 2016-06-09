@@ -1,7 +1,7 @@
 {
   "name": "@financial-times/n-image",
   "description": "Next responsive image component",
-  "version": "4.0.2",
+  "version": "4.1.0",
   "repository": "Financial-Times/n-image",
   "main": "main-server.js",
   "license": "MIT",
