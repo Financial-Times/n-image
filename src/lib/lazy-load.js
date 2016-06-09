@@ -3,9 +3,9 @@ import imagesLoaded from 'imagesloaded';
 const imageLazyLoadingClass = 'n-image--lazy-loading';
 
 const imageHasLoaded = instance =>
-	instance.elements.forEach(img => img.classList.remove(imageLazyLoadingClass))
+	instance.elements.forEach(img => img.classList.remove(imageLazyLoadingClass));
 
-const loadImage = img => {
+const loadImage = (img, opts) => {
 	// add the src/srcset attribtues back in
 	[...img.attributes]
 		.forEach(attr => {
@@ -14,33 +14,39 @@ const loadImage = img => {
 				img.removeAttribute(attr.name);
 			}
 		});
-	imagesLoaded(img, imageHasLoaded);
+	if (opts.dontFade) {
+		img.classList.remove(imageLazyLoadingClass);
+	} else {
+		imagesLoaded(img, imageHasLoaded);
+	}
 };
 
 // NOTE: `function` syntax, so maintains `this`
-const intersectionCallback = function (changes) {
+const intersectionCallback = (observer, changes, opts) => {
 	changes.forEach(change => {
 		const observedImg = change.target;
-		loadImage(observedImg)
-		this.unobserve(observedImg);
+		loadImage(observedImg, opts);
+		observer.unobserve(observedImg);
 	});
 };
 
-const observeIntersection = img => {
+const observeIntersection = (opts, img) => {
 	if (window.IntersectionObserver) {
 		const observer = new IntersectionObserver(
-			intersectionCallback,
+			function (changes) {
+				intersectionCallback(this, changes, opts);
+			},
 			{ rootMargin: '0px' }
 		);
 		observer.observe(img);
 	} else {
-		loadImage(img);
+		loadImage(img, opts);
 	}
 };
 
-const lazyLoad = () => {
+const lazyLoad = (opts = { dontFade: false }) => {
 	[...document.querySelectorAll(`.${imageLazyLoadingClass}`)]
-		.forEach(observeIntersection);
+		.forEach(observeIntersection.bind(null, opts));
 };
 
 export default lazyLoad;
