@@ -54,16 +54,11 @@ export default class extends Component {
 				.filter(size => size)
 				.join(', ');
 		}
-		const hideImageAttrs = hideImage(attrs);
-		hideImageAttrs.className += ' n-image--lazy-loading n-util-hide-no-js';
+		const lazyLoadedAttrs = hideImage(attrs);
+		lazyLoadedAttrs.className += ' n-image--lazy-loading n-util-hide-core';
 
 		return image.lazyLoad ?
-			<div className="n-image-lazy-loader">
-				<img {...hideImageAttrs} />
-				<noscript>
-					<img {...attrs} />
-				</noscript>
-			</div> :
+			<img {...lazyLoadedAttrs} /> :
 			<img {...attrs} />;
 	}
 };
