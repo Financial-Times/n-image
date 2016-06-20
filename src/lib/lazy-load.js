@@ -49,8 +49,14 @@ const observeIntersection = (opts, img) => {
 	img.setAttribute('data-n-image-lazy-load-js', '');
 };
 
+/**
+ * @param {Object} [opts = {}]
+ * @param {Element} [opts.root = document] - Where in the DOM to search for images
+ * @param {boolean} [dontFade = false] - Don't fade the images in (browser support for
+ * fading - http://imagesloaded.desandro.com/#browser-support)
+ */
 const lazyLoad = (opts = { }) => {
-	const {root = document, dontFade = dontFade } = opts;
+	const {root = document, dontFade = false } = opts;
 	[...root.querySelectorAll(`.${imageLazyLoadingClass}`)]
 		.filter(img => !img.hasAttribute('data-n-image-lazy-load-js'))
 		.forEach(observeIntersection.bind(null, { dontFade }));
