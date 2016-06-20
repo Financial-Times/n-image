@@ -26,7 +26,6 @@ const loadImage = (img, opts) => {
 	}
 };
 
-// NOTE: `function` syntax, so maintains `this`
 const intersectionCallback = (observer, changes, opts) => {
 	changes.forEach(change => {
 		const observedImg = change.target;
@@ -47,11 +46,14 @@ const observeIntersection = (opts, img) => {
 	} else {
 		loadImage(img, opts);
 	}
+	img.setAttribute('data-n-image-lazy-load-js', '');
 };
 
-const lazyLoad = (opts = { dontFade: false }) => {
-	[...document.querySelectorAll(`.${imageLazyLoadingClass}`)]
-		.forEach(observeIntersection.bind(null, opts));
+const lazyLoad = (opts = { }) => {
+	const {root = document, dontFade = dontFade } = opts;
+	[...root.querySelectorAll(`.${imageLazyLoadingClass}`)]
+		.filter(img => !img.hasAttribute('data-n-image-lazy-load-js'))
+		.forEach(observeIntersection.bind(null, { dontFade }));
 };
 
 export default lazyLoad;
