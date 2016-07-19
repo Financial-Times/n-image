@@ -10,7 +10,7 @@ const imageHasLoaded = instance =>
 		setTimeout(() => img.classList.remove(imageLazyLoadingClass), 13)
 	);
 
-const loadImage = (img, opts) => {
+const loadImage = (img, { dontFade }) => {
 	// add the src/srcset attribtues back in
 	[...img.attributes]
 		.forEach(attr => {
@@ -19,32 +19,26 @@ const loadImage = (img, opts) => {
 				img.removeAttribute(attr.name);
 			}
 		});
-	if (opts.dontFade) {
+	if (dontFade) {
 		img.classList.remove(imageLazyLoadingClass);
 	} else {
 		imagesLoaded(img, imageHasLoaded);
 	}
 };
 
-const intersectionCallback = (observer, changes, opts) => {
+const intersectionCallback = (observer, changes, { dontFade }) => {
 	changes.forEach(change => {
 		const observedImg = change.target;
-		loadImage(observedImg, opts);
+		loadImage(observedImg, { dontFade });
 		observer.unobserve(observedImg);
 	});
 };
 
-const observeIntersection = (opts, img) => {
-	if (window.IntersectionObserver) {
-		const observer = new IntersectionObserver(
-			function (changes) {
-				intersectionCallback(this, changes, opts);
-			},
-			{ rootMargin: '0px' }
-		);
+const observeIntersection = ({ dontFade, observer }, img) => {
+	if (observer) {
 		observer.observe(img);
 	} else {
-		loadImage(img, opts);
+		loadImage(img, { dontFade });
 	}
 	img.setAttribute('data-n-image-lazy-load-js', '');
 };
@@ -52,14 +46,18 @@ const observeIntersection = (opts, img) => {
 /**
  * @param {Object} [opts = {}]
  * @param {Element} [opts.root = document] - Where in the DOM to search for images
- * @param {boolean} [dontFade = false] - Don't fade the images in (browser support for
+ * @param {boolean} [opts.dontFade = false] - Don't fade the images in (browser support for
  * fading - http://imagesloaded.desandro.com/#browser-support)
  */
-const lazyLoad = (opts = { }) => {
-	const {root = document, dontFade = false } = opts;
+export default ({ root = document, dontFade = false } = { }) => {
+	const observer = window.IntersectionObserver ?
+		new IntersectionObserver(
+			function (changes) {
+				intersectionCallback(this, changes, { dontFade });
+			}
+		) :
+		null;
 	[...root.querySelectorAll(`.${imageLazyLoadingClass}`)]
 		.filter(img => !img.hasAttribute('data-n-image-lazy-load-js'))
-		.forEach(observeIntersection.bind(null, { dontFade }));
+		.forEach(observeIntersection.bind(null, { dontFade, observer }));
 };
-
-export default lazyLoad;
