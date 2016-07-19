@@ -1,7 +1,7 @@
 {
   "name": "@financial-times/n-image",
   "description": "Next responsive image component",
-  "version": "4.1.6",
+  "version": "0.0.0",
   "repository": "Financial-Times/n-image",
   "main": "main-server.js",
   "license": "MIT",
@@ -16,9 +16,13 @@
     "eslint-plugin-react": "^5.0.1",
     "lintspaces-cli": "^0.1.1",
     "mocha": "^2.4.5",
+    "npm-prepublish": "^1.2.1",
     "react-addons-test-utils": "^15.0.1"
   },
   "dependencies": {
     "react": "^15.0.1"
+  },
+  "engines": {
+    "node": "4.4.7"
   }
 }
