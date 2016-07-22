@@ -33,9 +33,14 @@ export default class extends Component {
 			.concat(image.classes || [])
 			.join(' ');
 		const attrs = {
-			alt: image.alt,
+			alt: image.alt || '',
 			className
 		};
+
+		if(!attrs.alt) {
+			attrs.role = 'presentation';
+		}
+
 		if (image.src) {
 			Object.assign(attrs, { src: image.src, width: image.width, height: image.height });
 		} else {
