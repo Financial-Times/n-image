@@ -28,6 +28,10 @@ const createSources = (urls, { alt = '', classes = [], withFallback = false }) =
 		alt
 	};
 
+	if(!alt) {
+		imgAttrs.role = 'presentation';
+	}
+
 	if (urls.default) {
 		const defaultSrc = urls.default;
 		if (withFallback) {
@@ -60,7 +64,6 @@ export default class extends Component {
 			classes: imgClasses,
 			withFallback: this.props.withFallback
 		};
-
 
 		// dangerouslySetInnerHTML is used to render the conditional IE9 comments
 		// Will throw an error if such comments are returned directly

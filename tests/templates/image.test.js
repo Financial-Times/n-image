@@ -2,6 +2,7 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import chai from 'chai';
 chai.should();
+const expect = chai.expect;
 
 import Image from '../../components/image';
 
@@ -21,6 +22,31 @@ describe('Image', () => {
 	it('should be able to set alt text', () => {
 		const image = <Image url="example/image.jpg" widths={[100]} alt="Description of the image" />;
 		renderComponent(image).props.alt.should.equal('Description of the image');
+	});
+
+	it('should have an empty alt attribute if no alt text set', () => {
+		const image = <Image url="example/image.jpg" widths={[100]} alt="" />;
+		renderComponent(image).props.alt.should.equal('');
+	});
+
+	it('should have an empty alt attribute if no alt attr is set', () => {
+		const image = <Image url="example/image.jpg" widths={[100]} />;
+		renderComponent(image).props.alt.should.equal('');
+	});
+
+	it('should set role to presentation when there is no alt text', () => {
+		const image = <Image url="example/image.jpg" widths={[100]} alt="" />;
+		renderComponent(image).props.role.should.equal('presentation');
+	});
+
+	it('should set role to presentation when there is no alt attr', () => {
+		const image = <Image url="example/image.jpg" widths={[100]} />;
+		renderComponent(image).props.role.should.equal('presentation');
+	});
+
+	it('should NOT set role to presentation when there is alt text', () => {
+		const image = <Image url="example/image.jpg" widths={[100]} alt="Description of the image" />;
+		expect(renderComponent(image).props.role).to.not.exist;
 	});
 
 	it('should be able to set classes', () => {
