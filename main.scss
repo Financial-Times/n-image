@@ -2,20 +2,72 @@
 
 $_n-image_applied: false !default;
 
+@keyframes lazy-loading {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0.1;
+	}
+}
+
 @if $_n-image_applied == false {
+	.n-image-wrapper {
+		position: relative;
+	}
+
+	.n-image-wrapper--placeholder {
+		background-color: transparent;
+		transition: background-color 1s;
+
+		&.n-image-wrapper--lazy-loading {
+			background-color: #dadada;
+
+			&:before {
+				content: '';
+				position: absolute;
+				display: block;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: url('https://next-geebee.ft.com/image/v1/images/raw/ftlogo:brand-ft?source=next&tint=999999,999999') 50%/20% no-repeat transparent;
+				animation: 1.5s ease-in infinite alternate lazy-loading;
+			}
+		}
+	}
+
+	.n-image-wrapper--landscape-placeholder {
+		padding-bottom: 56.25%;
+	}
+
+	.n-image-wrapper--square-placeholder {
+		padding-bottom: 100%;
+	}
+
+	.n-image-wrapper--lazy-loading {
+		.core & {
+			display: none !important;
+		}
+	}
+
 	.n-image {
+		display: block;
 		max-width: 100%;
 		opacity: 1;
 		transition: opacity 1s;
+
+		.n-image-wrapper--placeholder & {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
 	}
 
 	.n-image--lazy-loading {
-		width: 100%;
 		opacity: 0;
-	}
-
-	.n-image__img {
-		max-width: 100%;
+		width: 100%;
 	}
 
 	$_n-image_applied: true !global;

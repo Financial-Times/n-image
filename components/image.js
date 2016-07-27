@@ -25,6 +25,8 @@ const hideImage = obj =>
  * @param {string} [height] - Height of the image
  * @param {string} [alt = ''] - Alt text for the image
  * @param {boolean} [lazyLoad = false] - Lazy load the image
+ * @param {string|number} [placeholder] - Set to add a placeholder. Value should be the ratio of the image as a number
+ * (width divided by height, e.g.`16/9`), or string (`square` or `landscape`)
  */
 export default class extends Component {
 	render () {
@@ -36,11 +38,34 @@ export default class extends Component {
 			alt: image.alt || '',
 			className
 		};
+		const wrapperClassNames = ['n-image-wrapper'];
 
-		if(!attrs.alt) {
+		if (image.placeholder) {
+			wrapperClassNames.push('n-image-wrapper--placeholder');
+		}
+		let ratio = image.placeholder;
+		if (typeof ratio === 'number') {
+			if (ratio === 1) {
+				ratio = 'square';
+			} else if (ratio === 16 / 9) {
+				ratio = 'landscape'
+			}
+		}
+		if (['landscape', 'square'].indexOf(ratio) > -1) {
+			wrapperClassNames.push(`n-image-wrapper--${ratio}-placeholder`);
+		}
+		if (image.lazyLoad) {
+			wrapperClassNames.push('n-image-wrapper--lazy-loading');
+		}
+		const wrapperAttrs = {
+			className: wrapperClassNames.join(' ')
+		};
+		if (typeof ratio === 'number') {
+			wrapperAttrs.style = { 'padding-bottom': `${100 * (1 / ratio)}%` };
+		}
+		if (!attrs.alt) {
 			attrs.role = 'presentation';
 		}
-
 		if (image.src) {
 			Object.assign(attrs, { src: image.src, width: image.width, height: image.height });
 		} else {
@@ -60,10 +85,12 @@ export default class extends Component {
 				.join(', ');
 		}
 		const lazyLoadedAttrs = hideImage(attrs);
-		lazyLoadedAttrs.className += ' n-image--lazy-loading n-util-hide-core';
+		lazyLoadedAttrs.className += ' n-image--lazy-loading';
 
-		return image.lazyLoad ?
-			<img {...lazyLoadedAttrs} /> :
-			<img {...attrs} />;
+		return (
+			<div {...wrapperAttrs}>
+				{ image.lazyLoad ? <img {...lazyLoadedAttrs} /> : <img {...attrs} /> }
+			</div>
+		);
 	}
 };

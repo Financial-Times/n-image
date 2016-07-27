@@ -1,13 +1,18 @@
 import imagesLoaded from 'imagesloaded';
 
-const imageLazyLoadingClass = 'n-image--lazy-loading';
+const lazyLoadingModifier = 'lazy-loading';
+const lazyLoadingImageClass = `n-image--${lazyLoadingModifier}`;
+const lazyLoadingWrapperClass = `n-image-wrapper--${lazyLoadingModifier}`;
 
 const imageHasLoaded = instance =>
 	instance.elements.forEach(img =>
 		// NOTE: rather arbitrary pause, needed for the fading to work properly (guessing if the gap between changing
 		// the src/srcset attribtues and the class is too quick, css isn't applied correctly)
 		// if the fading doesn't always work, this might need increasing
-		setTimeout(() => img.classList.remove(imageLazyLoadingClass), 13)
+		setTimeout(() => {
+			img.classList.remove(lazyLoadingImageClass);
+			img.parentNode.classList.remove(lazyLoadingWrapperClass);
+		}, 13)
 	);
 
 const loadImage = (img, { dontFade }) => {
@@ -20,7 +25,7 @@ const loadImage = (img, { dontFade }) => {
 			}
 		});
 	if (dontFade) {
-		img.classList.remove(imageLazyLoadingClass);
+		imageHasLoaded({ elements: [img] });
 	} else {
 		imagesLoaded(img, imageHasLoaded);
 	}
@@ -57,7 +62,7 @@ export default ({ root = document, dontFade = false } = { }) => {
 			}
 		) :
 		null;
-	[...root.querySelectorAll(`.${imageLazyLoadingClass}`)]
+	[...root.querySelectorAll(`.${lazyLoadingImageClass}`)]
 		.filter(img => !img.hasAttribute('data-n-image-lazy-load-js'))
 		.forEach(observeIntersection.bind(null, { dontFade, observer }));
 };
