@@ -61,7 +61,7 @@ export default class extends Component {
 			className: wrapperClassNames.join(' ')
 		};
 		if (typeof ratio === 'number') {
-			wrapperAttrs.style = `padding-bottom: ${100 * (1 / ratio)}%`;
+			wrapperAttrs.style = { 'padding-bottom': `${100 * (1 / ratio)}%` };
 		}
 		if (!attrs.alt) {
 			attrs.role = 'presentation';
