@@ -18,6 +18,9 @@ $_n-image_applied: false !default;
 	}
 
 	.n-image-wrapper--placeholder {
+		background-color: transparent;
+		transition: background-color 1s;
+
 		&.n-image-wrapper--lazy-loading {
 			background-color: #dadada;
 
