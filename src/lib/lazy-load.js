@@ -1,21 +1,15 @@
-import imagesLoaded from 'imagesloaded';
-
 const lazyLoadingModifier = 'lazy-loading';
 const lazyLoadingImageClass = `n-image--${lazyLoadingModifier}`;
 const lazyLoadingWrapperClass = `n-image-wrapper--${lazyLoadingModifier}`;
 
-const imageHasLoaded = instance =>
-	instance.elements.forEach(img =>
-		// NOTE: rather arbitrary pause, needed for the fading to work properly (guessing if the gap between changing
-		// the src/srcset attribtues and the class is too quick, css isn't applied correctly)
-		// if the fading doesn't always work, this might need increasing
-		setTimeout(() => {
-			img.classList.remove(lazyLoadingImageClass);
-			img.parentNode.classList.remove(lazyLoadingWrapperClass);
-		}, 13)
-	);
+const imageHasLoaded = img => {
+	img.classList.remove(lazyLoadingImageClass);
+	img.parentNode.classList.remove(lazyLoadingWrapperClass);
+	img.removeEventListener('load', imageHasLoaded);
+};
 
-const loadImage = (img, { dontFade }) => {
+const loadImage = img => {
+	img.addEventListener('load', imageHasLoaded.bind(null, img));
 	// add the src/srcset attribtues back in
 	[...img.attributes]
 		.forEach(attr => {
@@ -24,26 +18,21 @@ const loadImage = (img, { dontFade }) => {
 				img.removeAttribute(attr.name);
 			}
 		});
-	if (dontFade) {
-		imageHasLoaded({ elements: [img] });
-	} else {
-		imagesLoaded(img, imageHasLoaded);
-	}
 };
 
-const intersectionCallback = (observer, changes, { dontFade }) => {
+const intersectionCallback = (observer, changes) => {
 	changes.forEach(change => {
 		const observedImg = change.target;
-		loadImage(observedImg, { dontFade });
+		loadImage(observedImg);
 		observer.unobserve(observedImg);
 	});
 };
 
-const observeIntersection = ({ dontFade, observer }, img) => {
+const observeIntersection = ({ observer }, img) => {
 	if (observer) {
 		observer.observe(img);
 	} else {
-		loadImage(img, { dontFade });
+		loadImage(img);
 	}
 	img.setAttribute('data-n-image-lazy-load-js', '');
 };
@@ -51,18 +40,16 @@ const observeIntersection = ({ dontFade, observer }, img) => {
 /**
  * @param {Object} [opts = {}]
  * @param {Element} [opts.root = document] - Where in the DOM to search for images
- * @param {boolean} [opts.dontFade = false] - Don't fade the images in (browser support for
- * fading - http://imagesloaded.desandro.com/#browser-support)
  */
-export default ({ root = document, dontFade = false } = { }) => {
+export default ({ root = document } = { }) => {
 	const observer = window.IntersectionObserver ?
 		new IntersectionObserver(
 			function (changes) {
-				intersectionCallback(this, changes, { dontFade });
+				intersectionCallback(this, changes);
 			}
 		) :
 		null;
 	[...root.querySelectorAll(`.${lazyLoadingImageClass}`)]
 		.filter(img => !img.hasAttribute('data-n-image-lazy-load-js'))
-		.forEach(observeIntersection.bind(null, { dontFade, observer }));
+		.forEach(observeIntersection.bind(null, { observer }));
 };
