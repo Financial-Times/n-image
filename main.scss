@@ -20,6 +20,7 @@ $_n-image_applied: false !default;
 	.n-image-wrapper--placeholder {
 		background-color: transparent;
 		transition: background-color 1s;
+		padding-bottom: 56.25%;
 
 		&.n-image-wrapper--lazy-loading {
 			background-color: #dadada;
@@ -36,10 +37,6 @@ $_n-image_applied: false !default;
 				animation: 1.5s ease-in infinite alternate lazy-loading;
 			}
 		}
-	}
-
-	.n-image-wrapper--landscape-placeholder {
-		padding-bottom: 56.25%;
 	}
 
 	.n-image-wrapper--square-placeholder {

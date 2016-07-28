@@ -51,7 +51,7 @@ export default class extends Component {
 				ratio = 'landscape'
 			}
 		}
-		if (['landscape', 'square'].indexOf(ratio) > -1) {
+		if (['square'].indexOf(ratio) > -1) {
 			wrapperClassNames.push(`n-image-wrapper--${ratio}-placeholder`);
 		}
 		if (image.lazyLoad) {
