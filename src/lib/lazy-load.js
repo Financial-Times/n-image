@@ -9,7 +9,10 @@ const imageHasLoaded = img => {
 };
 
 const loadImage = img => {
-	img.addEventListener('load', imageHasLoaded.bind(null, img));
+	img.addEventListener('load', () => {
+		// NOTE: rather arbitrary, needed to get the fading to always work (possibly classes being removed to quickly)
+		setTimeout(imageHasLoaded.bind(null, img), 13);
+	});
 	// add the src/srcset attribtues back in
 	[...img.attributes]
 		.forEach(attr => {
