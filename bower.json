@@ -7,7 +7,7 @@
   "description": "Responsive image component for next",
   "main": [
     "main.scss",
-    "dist/main-client.js"
+    "src/main-client.js"
   ],
   "license": "MIT",
   "ignore": [
