@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { breakpoints, buildImageServiceUrl } from '../src/helpers';
+import { breakpoints, buildImageServiceUrl } from '../helpers';
 
 // convert the `src` or `srcset` attribtues to a data attribute
 const hideImage = obj =>

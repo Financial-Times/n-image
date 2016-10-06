@@ -7,7 +7,7 @@
   "description": "Responsive image component for next",
   "main": [
     "main.scss",
-    "main-client.js"
+    "dist/main-client.js"
   ],
   "license": "MIT",
   "ignore": [
@@ -16,7 +16,6 @@
     ".npmignore",
     "circle.yml",
     "ft.yml",
-    "main-server.js",
     "Makefile",
     "n.Makefile",
     "package.json"
