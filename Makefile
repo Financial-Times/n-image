@@ -1,7 +1,7 @@
 include n.Makefile
 
 transpile:
-	babel src -d dist --presets=es2015,react
+	babel src -d dist
 
 unit-test:
 	mocha --require tests/setup --recursive --reporter spec tests
