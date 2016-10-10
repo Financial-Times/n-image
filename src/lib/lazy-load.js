@@ -1,9 +1,32 @@
 const lazyLoadingModifier = 'lazy-loading';
 const lazyLoadingImageClass = `n-image--${lazyLoadingModifier}`;
 const lazyLoadingWrapperClass = `n-image-wrapper--${lazyLoadingModifier}`;
-const performanceSupported = ('performance' in window && typeof window.performance.mark === 'function');
 
 const uid = () => (Date.now() * Math.random()).toString(16);
+
+//todo this stuff all lives (or should live) in n-ui but circular dependencies don't work
+const perfMeasure = (name, start, end) => {
+	const performance = window.LUX || window.performance || window.msPerformance || window.webkitPerformance || window.mozPerformance;
+	if (performance && performance.measure) {
+		performance.measure(name, start, end);
+	}
+};
+
+const perfMark = name => {
+	const performance = window.LUX || window.performance || window.msPerformance || window.webkitPerformance || window.mozPerformance;
+	if (performance && performance.mark) {
+		performance.mark(name);
+	}
+};
+
+const broadcast = (eventName, data) => {
+	// only do this 1% of the item so we don't flood Keen
+	if(Math.random().toFixed(2) !== '0.01'){
+		return;
+	}
+	const event = new CustomEvent(eventName, {detail:data});
+	document.body.dispatchEvent(event);
+};
 
 const setUid = (img) => {
 	const id = uid();
@@ -12,30 +35,18 @@ const setUid = (img) => {
 };
 
 const getUid = (img) => {
-	return img.dataset && img.dataset.uid ? img.dataset.uid : img.getAttribute('data-uid');
+	return img.getAttribute('data-uid');
 };
 
 const mark = (event, uid) => {
-	if(!performanceSupported){
-		return;
-	}
-
-	performance.mark(`${event}:${uid}`);
+	perfMark(`${event}:${uid}`);
 };
 
 const measure = (uid) => {
-	if(!performanceSupported){
-		return;
-	}
-
-	performance.measure(uid, `START:${uid}`, `END:${uid}`);
+	perfMeasure(uid, `START:${uid}`, `END:${uid}`);
 };
 
 const report = (name) => {
-	if(!performanceSupported){
-		return;
-	}
-
 	const entry = performance.getEntriesByName(name)[0];
 	const selector = `img[data-uid="${name}"]`;
 	const img = document.querySelector(selector);
@@ -45,8 +56,7 @@ const report = (name) => {
 			action: 'timing',
 			data: {src:img.currentSrc, duration:entry.duration}
 		};
-		const event = new CustomEvent('oTracking.event', {detail:eventData});
-		document.body.dispatchEvent(event);
+		broadcast('oTracking.event', eventData);
 	}
 };
 
