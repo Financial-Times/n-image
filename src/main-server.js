@@ -1,5 +1,7 @@
 import Image from './components/image';
 import Picture from './components/picture';
-import helpers from './helpers';
+import * as _helpers from './helpers';
 
-export { Image, Picture, helpers };
+export const helpers = _helpers;
+
+export { Image, Picture };
