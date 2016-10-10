@@ -4,7 +4,7 @@ import chai from 'chai';
 chai.should();
 const expect = chai.expect;
 
-import Image from '../../components/image';
+import Image from '../../src/components/image';
 
 const renderComponent = component => {
 	const shallowRenderer = ReactTestUtils.createRenderer();
