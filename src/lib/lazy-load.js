@@ -2,17 +2,81 @@ const lazyLoadingModifier = 'lazy-loading';
 const lazyLoadingImageClass = `n-image--${lazyLoadingModifier}`;
 const lazyLoadingWrapperClass = `n-image-wrapper--${lazyLoadingModifier}`;
 
+const uid = () => (Date.now() * Math.random()).toString(16);
+
+//todo this stuff all lives (or should live) in n-ui but circular dependencies don't work
+const perfMeasure = (name, start, end) => {
+	const performance = window.LUX || window.performance || window.msPerformance || window.webkitPerformance || window.mozPerformance;
+	if (performance && performance.measure) {
+		performance.measure(name, start, end);
+	}
+};
+
+const perfMark = name => {
+	const performance = window.LUX || window.performance || window.msPerformance || window.webkitPerformance || window.mozPerformance;
+	if (performance && performance.mark) {
+		performance.mark(name);
+	}
+};
+
+const broadcast = (eventName, data) => {
+	// only do this 1% of the item so we don't flood Keen
+	if(Math.random().toFixed(2) !== '0.01'){
+		return;
+	}
+	const event = new CustomEvent(eventName, {detail:data});
+	document.body.dispatchEvent(event);
+};
+
+const setUid = (img) => {
+	const id = uid();
+	img.setAttribute('data-uid', id);
+	return id;
+};
+
+const getUid = (img) => {
+	return img.getAttribute('data-uid');
+};
+
+const mark = (event, uid) => {
+	perfMark(`${event}:${uid}`);
+};
+
+const measure = (uid) => {
+	perfMeasure(uid, `START:${uid}`, `END:${uid}`);
+};
+
+const report = (name) => {
+	const entry = performance.getEntriesByName(name)[0];
+	const selector = `img[data-uid="${name}"]`;
+	const img = document.querySelector(selector);
+	if(img && img.currentSrc){
+		const eventData = {
+			category: 'lazy-image-load',
+			action: 'timing',
+			data: {src:img.currentSrc, duration:entry.duration}
+		};
+		broadcast('oTracking.event', eventData);
+	}
+};
+
 const imageHasLoaded = img => {
+	const uid = getUid(img);
+	mark('END', uid);
+	measure(uid);
 	img.classList.remove(lazyLoadingImageClass);
 	img.parentNode.classList.remove(lazyLoadingWrapperClass);
 	img.removeEventListener('load', imageHasLoaded);
+	report(uid);
 };
 
 const loadImage = img => {
+	const uid = setUid(img);
 	img.addEventListener('load', () => {
 		// NOTE: rather arbitrary, needed to get the fading to always work (possibly classes being removed to quickly)
 		setTimeout(imageHasLoaded.bind(null, img), 13);
 	});
+	mark('START', uid);
 	// add the src/srcset attribtues back in
 	[...img.attributes]
 		.forEach(attr => {
@@ -39,6 +103,8 @@ const observeIntersection = ({ observer }, img) => {
 	}
 	img.setAttribute('data-n-image-lazy-load-js', '');
 };
+
+
 
 /**
  * @param {Object} [opts = {}]
