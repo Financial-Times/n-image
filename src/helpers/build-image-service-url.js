@@ -1,6 +1,6 @@
 import qs from 'querystring';
 
-export default (url, params = {}, host = 'https://next-geebee.ft.com/image/v1/images/raw/') => {
+export default (url, params = {}, { host = 'https://next-geebee.ft.com/image/v1/images/raw/' } = { }) => {
 	const defaultOptions = {
 		source: 'next',
 		fit: 'scale-down',
