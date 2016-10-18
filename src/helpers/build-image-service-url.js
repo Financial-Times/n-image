@@ -1,12 +1,11 @@
 import qs from 'querystring';
 
-export default (url, params = {}) => {
+export default (url, params = {}, { host = 'https://next-geebee.ft.com/image/v1/images/raw/' } = { }) => {
 	const defaultOptions = {
 		source: 'next',
 		fit: 'scale-down',
 		compression: 'best'
 	};
 	const options = Object.assign({}, defaultOptions, params);
-
-	return `https://next-geebee.ft.com/image/v1/images/raw/${encodeURIComponent(url)}?${qs.stringify(options)}`;
+	return `${host + encodeURIComponent(url)}?${qs.stringify(options)}`;
 };
