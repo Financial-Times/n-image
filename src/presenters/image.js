@@ -1,7 +1,6 @@
 'use strict';
 
 import { breakpoints, buildImageServiceUrl, createImageSizes } from '../helpers';
-import logger from '@financial-times/n-logger';
 /**
  * @param {string} src - Actual src to use. If set, assume it's non-responsive, i.e. ignore url, widths, sizes
  * @param {string} srcSet - URL of the image to use in srcset
@@ -125,12 +124,12 @@ export default class ImagePresenter {
 		const srcSet = this.data.srcSet || this.data.url;
 
 		if (!this.data.src && !srcSet) {
-			logger.warn('No source for image provided');
+			console.warn('No source for image provided');
 		} else if (this.data.src) {
 			return { src: this.data.src, width: this.data.width, height: this.data.height };
 		} else {
 			if (widths.length === 0) {
-				logger.warn('Widths must be provided if setting srcSet');
+				console.warn('Widths must be provided if setting srcSet');
 			}
 			sourceAttrs.srcSet = widths
 				.sort((widthOne, widthTwo) => widthTwo - widthOne)
