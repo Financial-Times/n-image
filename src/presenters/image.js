@@ -13,7 +13,8 @@ import logger from '@financial-times/n-logger';
  * '{"default": 12, "M": 5}',
  * @param {string} [position = "{}"] - OPTIONAL Keys are breakpoints, values the position (top, bottom, left, right, stream-list). Used together with colspan to calculate sizes attribute e.g.
  * '{"default": "left", "M": "top"}'
- * @param {string[]|string} [classes = []] - Additional classes to add to the element
+ * @param {string[]|string} [classes = []] - Additional classes to add to the img element
+ * @param {string[]|string} [wrapperClasses = []] - Additional classes to add to the wrapper element
  * @param {string} [width] - Width of the image
  * @param {string} [height] - Height of the image
  * @param {string} [alt = ''] - Alt text for the image
@@ -51,28 +52,31 @@ export default class ImagePresenter {
 	}
 
 	get wrapperAttrs () {
-		const wrapperClassNames = ['n-image-wrapper'];
+		let wrapperClassName = 'n-image-wrapper';
 		let style;
 		const ratio = this.ratio;
+		if (this.data.wrapperClasses) {
+				wrapperClassName += ` ${this.optionalClasses(this.data.wrapperClasses)}`;
+		}
 		if (this.lazyLoad) {
-			wrapperClassNames.push('n-image-wrapper--lazy-loading');
+			wrapperClassName += ' n-image-wrapper--lazy-loading';
 		}
 		if (this.placeholder) {
-			wrapperClassNames.push('n-image-wrapper--placeholder');
+			wrapperClassName += ' n-image-wrapper--placeholder';
 		}
 		if (['square'].indexOf(ratio) > -1) {
-			wrapperClassNames.push(`n-image-wrapper--${ratio}-placeholder`);
+			wrapperClassName += ` n-image-wrapper--${ratio}-placeholder`;
 		} else if (typeof ratio === 'number') {
 			style = `padding-bottom=${100 * (1 / ratio)}%`;
 		}
 		return {
-			className: wrapperClassNames.join(' '),
+			className: wrapperClassName,
 			style
 		};
 	}
 
 	get imgAttrs () {
-		const className = `n-image ${this.optionalClasses()}`;
+		const className = `n-image ${this.optionalClasses(this.data.classes)}`;
 		const attrs = {
 			alt: this.data.alt || '',
 			className
@@ -93,13 +97,13 @@ export default class ImagePresenter {
 		return (typeof datum === 'string') ? JSON.parse(datum) : datum;
 	}
 
-	optionalClasses () {
-		if (!this.data.classes) {
+	optionalClasses (classes) {
+		if (!classes) {
 			return '';
-		} else if (Array.isArray(this.data.classes)) {
-			return this.data.classes.join(' ');
+		} else if (Array.isArray(classes)) {
+			return classes.join(' ');
 		} else {
-			return this.data.classes;
+			return classes;
 		}
 	}
 

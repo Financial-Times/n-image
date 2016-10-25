@@ -1,0 +1,16 @@
+<div class="{{@image.wrapperAttrs.className}}" style="{{@image.wrapperAttrs.style}}">
+  {{#with @image.imgAttrs}}
+    <img
+    {{#if src}}
+      src="{{src}}"
+      {{#if width}} width="{{width}}"{{/if}}
+      {{#if height}} height="{{height}}"{{/if}}
+    {{/if}}
+    {{#if data-src}} data-src="{{data-src}}"{{/if}}
+    {{#if srcSet}} srcSet="{{srcSet}}"{{/if}}
+    {{#if data-srcset}} data-srcset="{{data-srcset}}"{{/if}}
+    {{#if sizes}} sizes="{{sizes}}"{{/if}}
+    {{#if role}} role="{{role}}"{{/if}}
+    alt="{{alt}}" class="{{className}}" />
+  {{/with}}
+</div>

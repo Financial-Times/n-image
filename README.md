@@ -9,23 +9,12 @@ n-image provides an `ImagePresenter` class which can be used with the `presenter
 
 ### Using with the n-handlebars presenter
 
-By passing the context and some extra data options to the presenter helper, you will get a data structure returned to you. You can then pick out the relevant properties.
+By passing the context and some extra data options to the presenter helper, you will get a data structure returned to you. You can then use the partial provided in n-image/templates/image, or pick out the relevant properties.
 
 #### Complex example for responsive images
 ```html
 {{#presenter 'n-image/src/presenters/image' @this src=image.src srcSet=image.url placeholder=image.ratio colspan='{ "default": 12, "M": 6, "L": 5.25 }' position='{"default": "left"}' widths="[131, 196, 276]" lazyLoad=true}}
-  <div class="{{@image.wrapperAttrs.className}}" style="{{@image.wrapperAttrs.style}}">
-    {{#with @image.imgAttrs}}
-      <img
-        {{#if src}} src="{{src}}"{{/if}}
-        {{#if data-src}} data-src="{{data-src}}"{{/if}}
-        {{#if srcSet}} srcSet="{{srcSet}}"{{/if}}
-        {{#if data-srcset}} data-srcset="{{data-srcset}}"{{/if}}
-        {{#if sizes}} sizes="{{sizes}}"{{/if}}
-        {{#if role}} role="{{role}}"{{/if}}
-        alt="{{alt}}" class="{{className}}" />
-    {{/with}}
-  </div>
+  {{>'n-image/templates/image'}}
 {{/presenter}}
 ```
 results in
