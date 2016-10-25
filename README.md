@@ -49,7 +49,9 @@ The srcset and sizes syntaxes are used to provide the browser with a list of ima
 
 If `srcSet` (or `url` [DEPRECATED]) is provided, you MUST also provide `widths`.
 
-You MAY also provide **either** an array of pre-calculated `sizes` **or** get n-image to calculate your sizes attribute for you by providing arrays of `colspan` **and** `position` data.
+You SHOULD also provide **either** an array of pre-calculated `sizes` **or** get n-image to calculate your sizes attribute for you by providing arrays of `colspan` **and** `position` data.  Colspan will default to `{'default': 12}` and position will default to `{'default': 'top'}`.
+
+Sizes ensure that the smallest possible image is served up, e.g. if you have an image with widths [980,500,322] inside a container that has a grid colspan of 12 for default grid (i.e. mobile first) and 4 for large viewports, this will ensure that the user is served up the 500px image in large viewports rather than a 980px image shrunk to fit the box by the browser.
 
 These are based on our standard breakpoints. Fuller examples of accepted data are documented in the [source code](src/presenters/image.js).
 

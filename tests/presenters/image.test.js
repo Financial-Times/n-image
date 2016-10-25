@@ -134,7 +134,7 @@ describe('Image Presenter', () => {
 
     it('uses sizes attribute when given sizes in data', () => {
       const inst = new ImagePresenter({
-        srcset: 'foo.jpg',
+        srcSet: 'foo.jpg',
         sizes: {
           'default': '50px',
           'M': '120px'
@@ -145,7 +145,7 @@ describe('Image Presenter', () => {
 
     it('calculates sizes attribute when there is no sizes attribute but there is a colspan and position', () => {
       const inst = new ImagePresenter({
-        srcset: 'foo.jpg',
+        srcSet: 'foo.jpg',
         colspan: '{"default": 12, "M": 5}',
         position: '{"default": "left"}'
       });

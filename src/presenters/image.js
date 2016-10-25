@@ -1,7 +1,7 @@
 'use strict';
 
 import { breakpoints, buildImageServiceUrl, createImageSizes } from '../helpers';
-
+import logger from '@financial-times/n-logger';
 /**
  * @param {string} src - Actual src to use. If set, assume it's non-responsive, i.e. ignore url, widths, sizes
  * @param {string} srcSet - URL of the image to use in srcset
@@ -50,7 +50,7 @@ export default class ImagePresenter {
     return this.data.placeholder;
   }
 
-  get wrapperAttrs() {
+  get wrapperAttrs () {
     const wrapperClassNames = ['n-image-wrapper'];
     let style;
     const ratio = this.ratio;
@@ -71,7 +71,7 @@ export default class ImagePresenter {
     };
   }
 
-  get imgAttrs() {
+  get imgAttrs () {
     const className = `n-image ${this.optionalClasses()}`;
     const attrs = {
       alt: this.data.alt || '',
@@ -118,34 +118,38 @@ export default class ImagePresenter {
     const sourceAttrs = {};
     const sizes = this.convertToJson(this.data.sizes) || this.imageSizes() || {};
     const widths = this.convertToJson(this.data.widths) || [];
-    const srcSet = this.data.srcSet || this.data.url || '';
+    const srcSet = this.data.srcSet || this.data.url;
 
-    if (this.data.src) {
+    if (!this.data.src && !srcSet) {
+      logger.warn('No source for image provided');
+    } else if (this.data.src) {
       return { src: this.data.src, width: this.data.width, height: this.data.height };
+    } else {
+      if (widths.length === 0) {
+        logger.warn('Widths must be provided if setting srcSet');
+      }
+      sourceAttrs.srcSet = widths
+        .sort((widthOne, widthTwo) => widthTwo - widthOne)
+        .map(width => `${buildImageServiceUrl(srcSet, { width })} ${width}w`)
+        .join(', ');
+
+      sourceAttrs.sizes = breakpoints
+        .map(breakpoint => {
+          const size = sizes[breakpoint.name];
+          return size ?
+            breakpoint.name === 'default' ? size : `(min-width: ${breakpoint.px}px) ${size}` :
+            null;
+        })
+        .filter(size => size)
+        .join(', ');
+
+      return sourceAttrs;
     }
-
-    sourceAttrs.srcSet = widths
-      .sort((widthOne, widthTwo) => widthTwo - widthOne)
-      .map(width => `${buildImageServiceUrl(srcSet, { width })} ${width}w`)
-      .join(', ');
-
-    sourceAttrs.sizes = breakpoints
-      .map(breakpoint => {
-        const size = sizes[breakpoint.name];
-        return size ?
-          breakpoint.name === 'default' ? size : `(min-width: ${breakpoint.px}px) ${size}` :
-          null;
-      })
-      .filter(size => size)
-      .join(', ');
-
-    return sourceAttrs;
   }
 
   imageSizes () {
-    if (this.data.colspan && this.data.position) {
-      const sizes = createImageSizes(this.convertToJson(this.data.colspan), this.convertToJson(this.data.position));
-      return sizes;
-    }
+    const colspan = this.convertToJson(this.data.colspan) || {'default': 12};
+    const position = this.convertToJson(this.data.position) || {'default': 'top'};
+    return createImageSizes(colspan, position);
   }
 }
