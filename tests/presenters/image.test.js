@@ -68,7 +68,7 @@ describe('Image Presenter', () => {
 			const inst = new ImagePresenter({
 				placeholder: 2
 			});
-			expect(inst.wrapperAttrs.style).to.equal('padding-bottom=50%');
+			expect(inst.wrapperAttrs.styleString).to.equal('padding-bottom:50%');
 		});
 	});
 

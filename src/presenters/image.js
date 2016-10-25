@@ -53,6 +53,7 @@ export default class ImagePresenter {
 	get wrapperAttrs () {
 		let wrapperClassName = 'n-image-wrapper';
 		let style;
+		let styleString;
 		const ratio = this.ratio;
 		if (this.data.wrapperClasses) {
 				wrapperClassName += ` ${this.optionalClasses(this.data.wrapperClasses)}`;
@@ -66,10 +67,12 @@ export default class ImagePresenter {
 		if (['square'].indexOf(ratio) > -1) {
 			wrapperClassName += ` n-image-wrapper--${ratio}-placeholder`;
 		} else if (typeof ratio === 'number') {
-			style = `padding-bottom=${100 * (1 / ratio)}%`;
+			style = { 'paddingBottom': `${100 * (1 / ratio)}%` };
+			styleString = `padding-bottom:${style.paddingBottom}`;
 		}
 		return {
 			className: wrapperClassName,
+			styleString,
 			style
 		};
 	}
