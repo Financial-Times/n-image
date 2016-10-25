@@ -23,133 +23,133 @@ import logger from '@financial-times/n-logger';
  */
 
 export default class ImagePresenter {
-  constructor (data) {
-    this.data = data;
-  }
+	constructor (data) {
+		this.data = data;
+	}
 
-  get ratio () {
-    let ratio = this.placeholder;
-    if (typeof ratio === 'number') {
-      if (ratio === 1) {
-        ratio = 'square';
-      } else if (ratio === 16 / 9) {
-        ratio = 'landscape';
-      }
-    }
-    return ratio;
-  }
+	get ratio () {
+		let ratio = this.placeholder;
+		if (typeof ratio === 'number') {
+			if (ratio === 1) {
+				ratio = 'square';
+			} else if (ratio === 16 / 9) {
+				ratio = 'landscape';
+			}
+		}
+		return ratio;
+	}
 
-  get lazyLoad () {
-    return this.data.lazyLoad;
-  }
+	get lazyLoad () {
+		return this.data.lazyLoad;
+	}
 
-  get placeholder () {
-    if (parseFloat(this.data.placeholder)) {
-        return (parseFloat(this.data.placeholder));
-    }
-    return this.data.placeholder;
-  }
+	get placeholder () {
+		if (parseFloat(this.data.placeholder)) {
+				return (parseFloat(this.data.placeholder));
+		}
+		return this.data.placeholder;
+	}
 
-  get wrapperAttrs () {
-    const wrapperClassNames = ['n-image-wrapper'];
-    let style;
-    const ratio = this.ratio;
-    if (this.lazyLoad) {
-      wrapperClassNames.push('n-image-wrapper--lazy-loading');
-    }
-    if (this.placeholder) {
-      wrapperClassNames.push('n-image-wrapper--placeholder');
-    }
-    if (['square'].indexOf(ratio) > -1) {
-      wrapperClassNames.push(`n-image-wrapper--${ratio}-placeholder`);
-    } else if (typeof ratio === 'number') {
-      style = `padding-bottom=${100 * (1 / ratio)}%`;
-    }
-    return {
-      className: wrapperClassNames.join(' '),
-      style
-    };
-  }
+	get wrapperAttrs () {
+		const wrapperClassNames = ['n-image-wrapper'];
+		let style;
+		const ratio = this.ratio;
+		if (this.lazyLoad) {
+			wrapperClassNames.push('n-image-wrapper--lazy-loading');
+		}
+		if (this.placeholder) {
+			wrapperClassNames.push('n-image-wrapper--placeholder');
+		}
+		if (['square'].indexOf(ratio) > -1) {
+			wrapperClassNames.push(`n-image-wrapper--${ratio}-placeholder`);
+		} else if (typeof ratio === 'number') {
+			style = `padding-bottom=${100 * (1 / ratio)}%`;
+		}
+		return {
+			className: wrapperClassNames.join(' '),
+			style
+		};
+	}
 
-  get imgAttrs () {
-    const className = `n-image ${this.optionalClasses()}`;
-    const attrs = {
-      alt: this.data.alt || '',
-      className
-    };
-    if (!attrs.alt) {
-      attrs.role = 'presentation';
-    }
-    Object.assign(attrs, this.imageSource());
-    if (this.lazyLoad) {
-      Object.assign(attrs, this.hideImage(attrs));
-      attrs.className += ' n-image--lazy-loading';
-    }
-    return attrs;
-  }
+	get imgAttrs () {
+		const className = `n-image ${this.optionalClasses()}`;
+		const attrs = {
+			alt: this.data.alt || '',
+			className
+		};
+		if (!attrs.alt) {
+			attrs.role = 'presentation';
+		}
+		Object.assign(attrs, this.imageSource());
+		if (this.lazyLoad) {
+			Object.assign(attrs, this.hideImage(attrs));
+			attrs.className += ' n-image--lazy-loading';
+		}
+		return attrs;
+	}
 
-  // handlebars is limited to strings for attributes, conversion for array and objects
-  convertToJson (datum) {
-    return (typeof datum === 'string') ? JSON.parse(datum) : datum;
-  }
+	// handlebars is limited to strings for attributes, conversion for array and objects
+	convertToJson (datum) {
+		return (typeof datum === 'string') ? JSON.parse(datum) : datum;
+	}
 
-  optionalClasses () {
-    if (!this.data.classes) {
-      return '';
-    } else if (Array.isArray(this.data.classes)) {
-      return this.data.classes.join(' ');
-    } else {
-      return this.data.classes;
-    }
-  }
+	optionalClasses () {
+		if (!this.data.classes) {
+			return '';
+		} else if (Array.isArray(this.data.classes)) {
+			return this.data.classes.join(' ');
+		} else {
+			return this.data.classes;
+		}
+	}
 
-  // convert the `src` or `srcset` attribtues to a data attribute
-  hideImage (obj) {
-    return Object.keys(obj)
-  		.reduce((dataObj, name) => {
-  			if (name === 'src' || name === 'srcSet') {
-  				dataObj[`data-${name.toLowerCase()}`] = obj[name];
-  			}
-  			return dataObj;
-  		}, {});
-  }
+	// convert the `src` or `srcset` attribtues to a data attribute
+	hideImage (obj) {
+		return Object.keys(obj)
+			.reduce((dataObj, name) => {
+				if (name === 'src' || name === 'srcSet') {
+					dataObj[`data-${name.toLowerCase()}`] = obj[name];
+				}
+				return dataObj;
+			}, {});
+	}
 
-  imageSource () {
-    const sourceAttrs = {};
-    const sizes = this.convertToJson(this.data.sizes) || this.imageSizes() || {};
-    const widths = this.convertToJson(this.data.widths) || [];
-    const srcSet = this.data.srcSet || this.data.url;
+	imageSource () {
+		const sourceAttrs = {};
+		const sizes = this.convertToJson(this.data.sizes) || this.imageSizes() || {};
+		const widths = this.convertToJson(this.data.widths) || [];
+		const srcSet = this.data.srcSet || this.data.url;
 
-    if (!this.data.src && !srcSet) {
-      logger.warn('No source for image provided');
-    } else if (this.data.src) {
-      return { src: this.data.src, width: this.data.width, height: this.data.height };
-    } else {
-      if (widths.length === 0) {
-        logger.warn('Widths must be provided if setting srcSet');
-      }
-      sourceAttrs.srcSet = widths
-        .sort((widthOne, widthTwo) => widthTwo - widthOne)
-        .map(width => `${buildImageServiceUrl(srcSet, { width })} ${width}w`)
-        .join(', ');
+		if (!this.data.src && !srcSet) {
+			logger.warn('No source for image provided');
+		} else if (this.data.src) {
+			return { src: this.data.src, width: this.data.width, height: this.data.height };
+		} else {
+			if (widths.length === 0) {
+				logger.warn('Widths must be provided if setting srcSet');
+			}
+			sourceAttrs.srcSet = widths
+				.sort((widthOne, widthTwo) => widthTwo - widthOne)
+				.map(width => `${buildImageServiceUrl(srcSet, { width })} ${width}w`)
+				.join(', ');
 
-      sourceAttrs.sizes = breakpoints
-        .map(breakpoint => {
-          const size = sizes[breakpoint.name];
-          return size ?
-            breakpoint.name === 'default' ? size : `(min-width: ${breakpoint.px}px) ${size}` :
-            null;
-        })
-        .filter(size => size)
-        .join(', ');
+			sourceAttrs.sizes = breakpoints
+				.map(breakpoint => {
+					const size = sizes[breakpoint.name];
+					return size ?
+						breakpoint.name === 'default' ? size : `(min-width: ${breakpoint.px}px) ${size}` :
+						null;
+				})
+				.filter(size => size)
+				.join(', ');
 
-      return sourceAttrs;
-    }
-  }
+			return sourceAttrs;
+		}
+	}
 
-  imageSizes () {
-    const colspan = this.convertToJson(this.data.colspan) || {'default': 12};
-    const position = this.convertToJson(this.data.position) || {'default': 'top'};
-    return createImageSizes(colspan, position);
-  }
+	imageSizes () {
+		const colspan = this.convertToJson(this.data.colspan) || {'default': 12};
+		const position = this.convertToJson(this.data.position) || {'default': 'top'};
+		return createImageSizes(colspan, position);
+	}
 }
