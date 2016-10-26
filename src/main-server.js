@@ -1,9 +1,5 @@
-import Image from './components/image';
-import Picture from './components/picture';
+const helpers = require('./helpers');
+const Image = require('./components/image');
+const Picture = require('./components/picture');
 
-// HACK: too many nested Babel interop require calls and this reference can get lost =[
-import * as _helpers from './helpers';
-
-export const helpers = _helpers;
-
-export { Image, Picture };
+module.exports = { helpers, Image, Picture };
