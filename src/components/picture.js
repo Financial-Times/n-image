@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 const React = require('react');
 const breakpoints = require('../helpers/breakpoints');
 

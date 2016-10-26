@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 const React = require('react');
 const ImagePresenter = require('../presenters/image');
 
