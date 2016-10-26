@@ -45,7 +45,10 @@ class ImagePresenter {
 	}
 
 	get placeholder () {
-		if (parseFloat(this.data.placeholder)) {
+		if (!this.data.placeholder && parseInt(this.data.width, 10) && parseInt(this.data.height, 10)) {
+			return parseInt(this.data.width) / parseInt(this.data.height);
+		}
+		else if (parseFloat(this.data.placeholder)) {
 				return (parseFloat(this.data.placeholder));
 		}
 		return this.data.placeholder;

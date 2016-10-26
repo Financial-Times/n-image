@@ -3,6 +3,15 @@ import ImagePresenter from '../../src/presenters/image';
 
 describe('Image Presenter', () => {
 	describe('Placeholders', () => {
+
+		it('tries to get ratio from width and height if there is no placeholder', () => {
+			const inst = new ImagePresenter({
+				width: '300px',
+				height: '150px'
+			});
+			expect(inst.placeholder).to.equal(2);
+		});
+
 		it('returns placeholder as a floating point number if it converts to one', () => {
 			const inst = new ImagePresenter({
 				placeholder: '1'
