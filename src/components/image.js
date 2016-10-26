@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
-import ImagePresenter from '../presenters/image';
+const React = require('react');
+const ImagePresenter = require('../presenters/image');
 
-export default class extends Component {
+const Component = React.Component;
+
+class Image extends Component {
 	render () {
 		const imageData = new ImagePresenter(this.props);
 		return (
@@ -11,3 +13,5 @@ export default class extends Component {
 		);
 	}
 }
+
+module.exports = Image;

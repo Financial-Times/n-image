@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+const React = require('react');
+const breakpoints = require('../helpers/breakpoints');
 
-import { breakpoints } from '../helpers/';
+const Component = React.Component;
 
 const createImg = attrs => {
 	const attrsStringified = Object.keys(attrs)
@@ -55,7 +56,7 @@ const createSources = (urls, { alt = '', classes = [], withFallback = false }) =
  * @param {string[]|string} [imgClasses = []] - Additional classes to add to the `img` element
  * @param {string} [alt = ''] - Alt text for the image
  */
-export default class extends Component {
+class Picture extends Component {
 	render () {
 		const classes = ['n-image'].concat(this.props.classes || []).join(' ');
 		const imgClasses = ['n-image__img'].concat(this.props.imgClasses || []);
@@ -75,3 +76,5 @@ export default class extends Component {
 		);
 	}
 }
+
+module.exports = Picture;

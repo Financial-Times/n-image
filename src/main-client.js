@@ -1,3 +1,2 @@
-import lazyLoad from './lib/lazy-load';
-
-export { lazyLoad };
+const lazyLoad = require('./lib/lazy-load');
+module.exports = { lazyLoad };

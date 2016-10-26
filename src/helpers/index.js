@@ -1,5 +1,5 @@
-import breakpoints from '../helpers/breakpoints';
-import buildImageServiceUrl from '../helpers/build-image-service-url';
-import createImageSizes from '../helpers/create-image-sizes';
+const breakpoints = require('../helpers/breakpoints');
+const buildImageServiceUrl = require('../helpers/build-image-service-url');
+const createImageSizes = require('../helpers/create-image-sizes');
 
-export { breakpoints, buildImageServiceUrl, createImageSizes };
+module.exports = { breakpoints, buildImageServiceUrl, createImageSizes };

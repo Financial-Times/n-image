@@ -110,7 +110,7 @@ const observeIntersection = ({ observer }, img) => {
  * @param {Object} [opts = {}]
  * @param {Element} [opts.root = document] - Where in the DOM to search for images
  */
-export default ({ root = document } = { }) => {
+module.exports = ({ root = document } = { }) => {
 	const observer = window.IntersectionObserver ?
 		new IntersectionObserver(
 			function (changes) {

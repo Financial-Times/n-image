@@ -1,4 +1,4 @@
-import breakpoints from './breakpoints';
+const breakpoints = require('./breakpoints');
 
 const breakpointNames = breakpoints.map( breakpoint => {
 	return breakpoint.name;
@@ -51,7 +51,7 @@ const getSize = (pagePadding, cardPadding, colspan, position, pageSize = false) 
 	}
 };
 
-export default (colspan, position, cardPaddings = defaultCardPaddings) => {
+module.exports = (colspan, position, cardPaddings = defaultCardPaddings) => {
 	let currentPagePadding;
 	let currentCardPadding;
 	let currentColspan;
