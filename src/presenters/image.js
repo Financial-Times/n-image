@@ -1,6 +1,7 @@
-'use strict';
+const breakpoints = require('../helpers/breakpoints');
+const buildImageServiceUrl = require('../helpers/build-image-service-url');
+const createImageSizes = require('../helpers/create-image-sizes');
 
-import { breakpoints, buildImageServiceUrl, createImageSizes } from '../helpers';
 /**
  * @param {string} src - Actual src to use. If set, assume it's non-responsive, i.e. ignore url, widths, sizes
  * @param {string} srcSet - URL of the image to use in srcset
@@ -22,7 +23,7 @@ import { breakpoints, buildImageServiceUrl, createImageSizes } from '../helpers'
  * (width divided by height, e.g.`16/9`), or string (`square` or `landscape`)
  */
 
-export default class ImagePresenter {
+class ImagePresenter {
 	constructor (data) {
 		this.data = data;
 	}
@@ -159,3 +160,5 @@ export default class ImagePresenter {
 		return createImageSizes(colspan, position);
 	}
 }
+
+module.exports = ImagePresenter;
