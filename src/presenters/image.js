@@ -116,6 +116,7 @@ class ImagePresenter {
 			.reduce((dataObj, name) => {
 				if (name === 'src' || name === 'srcSet') {
 					dataObj[`data-${name.toLowerCase()}`] = obj[name];
+					obj[name] = null;
 				}
 				return dataObj;
 			}, {});
