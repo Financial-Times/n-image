@@ -3,17 +3,16 @@ const lazyLoadingImageClass = `n-image--${lazyLoadingModifier}`;
 const lazyLoadingWrapperClass = `n-image-wrapper--${lazyLoadingModifier}`;
 
 const uid = () => (Date.now() * Math.random()).toString(16);
+const performance = window.LUX || window.performance || window.msPerformance || window.webkitPerformance || window.mozPerformance;
 
 //todo this stuff all lives (or should live) in n-ui but circular dependencies don't work
 const perfMeasure = (name, start, end) => {
-	const performance = window.LUX || window.performance || window.msPerformance || window.webkitPerformance || window.mozPerformance;
 	if (performance && performance.measure) {
 		performance.measure(name, start, end);
 	}
 };
 
 const perfMark = name => {
-	const performance = window.LUX || window.performance || window.msPerformance || window.webkitPerformance || window.mozPerformance;
 	if (performance && performance.mark) {
 		performance.mark(name);
 	}
@@ -47,7 +46,7 @@ const measure = (uid) => {
 };
 
 const report = (name) => {
-	if (performance.getEntriesByName) {
+	if (performance && performance.getEntriesByName) {
 		const entry = performance.getEntriesByName(name)[0];
 		const selector = `img[data-uid="${name}"]`;
 		const img = document.querySelector(selector);
