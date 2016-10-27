@@ -19,14 +19,14 @@ const perfMark = name => {
 	}
 };
 
-// const broadcast = (eventName, data) => {
-// 	// only do this 1% of the item so we don't flood Keen
-// 	if(Math.random().toFixed(2) !== '0.01'){
-// 		return;
-// 	}
-// 	const event = new CustomEvent(eventName, {detail:data});
-// 	document.body.dispatchEvent(event);
-// };
+const broadcast = (eventName, data) => {
+	// only do this 1% of the item so we don't flood Keen
+	if(Math.random().toFixed(2) !== '0.01'){
+		return;
+	}
+	const event = new CustomEvent(eventName, {detail:data});
+	document.body.dispatchEvent(event);
+};
 
 const setUid = (img) => {
 	const id = uid();
@@ -46,19 +46,21 @@ const measure = (uid) => {
 	perfMeasure(uid, `START:${uid}`, `END:${uid}`);
 };
 
-// const report = (name) => {
-// 	const entry = performance.getEntriesByName(name)[0];
-// 	const selector = `img[data-uid="${name}"]`;
-// 	const img = document.querySelector(selector);
-// 	if(img && img.currentSrc){
-// 		const eventData = {
-// 			category: 'lazy-image-load',
-// 			action: 'timing',
-// 			data: {src:img.currentSrc, duration:entry.duration}
-// 		};
-// 		broadcast('oTracking.event', eventData);
-// 	}
-// };
+const report = (name) => {
+	if (performance.getEntriesByName) {
+		const entry = performance.getEntriesByName(name)[0];
+		const selector = `img[data-uid="${name}"]`;
+		const img = document.querySelector(selector);
+		if(img && img.currentSrc){
+			const eventData = {
+				category: 'lazy-image-load',
+				action: 'timing',
+				data: {src:img.currentSrc, duration:entry.duration}
+			};
+			broadcast('oTracking.event', eventData);
+		}
+	}
+};
 
 const imageHasLoaded = img => {
 	const uid = getUid(img);
@@ -67,7 +69,7 @@ const imageHasLoaded = img => {
 	img.classList.remove(lazyLoadingImageClass);
 	img.parentNode.classList.remove(lazyLoadingWrapperClass);
 	img.removeEventListener('load', imageHasLoaded);
-	// report(uid);
+	report(uid);
 };
 
 const loadImage = img => {
