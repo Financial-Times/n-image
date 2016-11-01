@@ -22,5 +22,6 @@
   ],
   "dependencies": {
     "n-ui": "^2.0.0"
-  }
+  },
+  "ignore": [ ".babelrc" ]
 }
