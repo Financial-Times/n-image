@@ -1,4 +1,4 @@
-const ImagePresenter = require('./image');
+const ImagePresenter = require('../presenters/image');
 
 module.exports = (options) => {
 	if (options.data) {
