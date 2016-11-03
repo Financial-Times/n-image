@@ -1,6 +1,6 @@
 const qs = require('querystring');
 
-module.exports = (url, params = {}, { host = 'https://next-geebee.ft.com/image/v1/images/raw/' } = { }) => {
+module.exports = (url, params = {}, { host = 'https://www.ft.com/__origami/service/image/v2/images/raw/' } = { }) => {
 	const defaultOptions = {
 		source: 'next',
 		fit: 'scale-down',
