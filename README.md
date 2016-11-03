@@ -21,7 +21,7 @@ results in
 
 ```html
 <div class="n-image-wrapper" style="">
-<img srcset="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fprod-upp-image-read.ft.com%2F2f02641e-99ed-11e6-8f9b-70e3cabccfae?source=next&amp;fit=scale-down&amp;compression=best&amp;width=276 276w, https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fprod-upp-image-read.ft.com%2F2f02641e-99ed-11e6-8f9b-70e3cabccfae?source=next&amp;fit=scale-down&amp;compression=best&amp;width=196 196w, https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fprod-upp-image-read.ft.com%2F2f02641e-99ed-11e6-8f9b-70e3cabccfae?source=next&amp;fit=scale-down&amp;compression=best&amp;width=131 131w" sizes="(min-width: 1220px) 200px, (min-width: 980px) 158px, (min-width: 740px) 134px, calc(40vw - 16px)" role="presentation" alt="" class="n-image" data-n-image-lazy-load-js="" data-uid="5c380063e3.be7">
+<img srcset="https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fprod-upp-image-read.ft.com%2F2f02641e-99ed-11e6-8f9b-70e3cabccfae?source=next&amp;fit=scale-down&amp;compression=best&amp;width=276 276w, https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fprod-upp-image-read.ft.com%2F2f02641e-99ed-11e6-8f9b-70e3cabccfae?source=next&amp;fit=scale-down&amp;compression=best&amp;width=196 196w, https://www.ft.com/__origami/service/image/v2/images/raw/http%3A%2F%2Fprod-upp-image-read.ft.com%2F2f02641e-99ed-11e6-8f9b-70e3cabccfae?source=next&amp;fit=scale-down&amp;compression=best&amp;width=131 131w" sizes="(min-width: 1220px) 200px, (min-width: 980px) 158px, (min-width: 740px) 134px, calc(40vw - 16px)" role="presentation" alt="" class="n-image" data-n-image-lazy-load-js="" data-uid="5c380063e3.be7">
 </div>
 ```
 
@@ -79,8 +79,8 @@ renders to
     class="n-image a-class another-class"
     alt="A useful description"
     sizes="(min-width: 1220px) 100vw * 0.5, 100vw"
-    srcset="https://next-geebee.ft.com/image/v1/images/raw/an%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=100 100w,
-            https://next-geebee.ft.com/image/v1/images/raw/an%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=200 200w" />
+    srcset="https://www.ft.com/__origami/service/image/v2/images/raw/an%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=100 100w,
+            https://www.ft.com/__origami/service/image/v2/images/raw/an%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=200 200w" />
 ```
 
 #### `picture` Element
