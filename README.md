@@ -13,9 +13,9 @@ By passing the context and some extra data options to the presenter helper, you 
 
 #### Complex example for responsive images
 ```html
-{{#presenter 'n-image/src/presenters/image' @this src=image.src srcSet=image.url placeholder=image.ratio colspan='{ "default": 12, "M": 6, "L": 5.25 }' position='{"default": "left"}' widths="[131, 196, 276]" lazyLoad=true}}
-  {{>'n-image/templates/image'}}
-{{/presenter}}
+{{#nImagePresenter srcSet=image.url placeholder=image.ratio colspan='{ "default": 12, "M": 6, "L": 5.25 }' position='{"default": "left"}' widths="[131, 196, 276]" lazyLoad=true}}
+	{{> n-image/templates/image }}
+{{/nImagePresenter}}
 ```
 results in
 
