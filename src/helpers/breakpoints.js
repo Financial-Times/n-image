@@ -1,4 +1,4 @@
-export default [
+module.exports = [
 	{
 		name: 'XXL',
 		px: '1440'
