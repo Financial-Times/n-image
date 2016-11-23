@@ -1,6 +1,6 @@
 const qs = require('querystring');
 
-const capiRX = /^http:\/\/com\.ft\.imagepublish\.prod\.s3\.amazonaws\.com\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/
+const capiRX = /^https?:\/\/(?:com\.ft\.imagepublish\.prod(-us)?\.s3\.amazonaws\.com|im\.ft-static\.com\/content\/images)\/([0-9a-f-]+)(?:\.img)?$/i
 
 module.exports = (url, params = {}, { host = 'https://www.ft.com/__origami/service/image/v2/images/raw/' } = { }) => {
 	const defaultOptions = {
