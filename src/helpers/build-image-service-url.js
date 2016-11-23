@@ -1,5 +1,7 @@
 const qs = require('querystring');
 
+const capiRX = /^https?:\/\/(?:com\.ft\.imagepublish\.prod(-us)?\.s3\.amazonaws\.com|im\.ft-static\.com\/content\/images)\/([0-9a-f-]+)(?:\.img)?$/i
+
 module.exports = (url, params = {}, { host = 'https://www.ft.com/__origami/service/image/v2/images/raw/' } = { }) => {
 	const defaultOptions = {
 		source: 'next',
@@ -7,5 +9,7 @@ module.exports = (url, params = {}, { host = 'https://www.ft.com/__origami/servi
 		compression: 'best'
 	};
 	const options = Object.assign({}, defaultOptions, params);
-	return `${host + encodeURIComponent(url)}?${qs.stringify(options)}`;
+	const capiUUID = (capiRX.exec(url) || [])[1];
+
+	return `${host + (capiUUID ? 'ftcms:'+capiUUID : encodeURIComponent(url))}?${qs.stringify(options)}`;
 };
