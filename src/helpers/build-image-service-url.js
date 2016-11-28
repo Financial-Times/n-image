@@ -9,7 +9,7 @@ module.exports = (url, params = {}, { host = 'https://www.ft.com/__origami/servi
 		compression: 'best'
 	};
 	const options = Object.assign({}, defaultOptions, params);
-	const capiUUID = (capiRX.exec(url) || [])[1];
+	const capiUUID = (capiRX.exec(url) || [])[2];
 
 	return `${host + (capiUUID ? 'ftcms:'+capiUUID : encodeURIComponent(url))}?${qs.stringify(options)}`;
 };
