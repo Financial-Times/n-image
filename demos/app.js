@@ -24,4 +24,4 @@ app.get('/', (req, res) => {
 	}, fixtures));
 });
 
-const listen = app.listen(5005);
+app.listen(5005);
