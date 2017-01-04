@@ -1,4 +1,3 @@
-const logger = require('@financial-times/n-logger').default;
 const breakpoints = require('../helpers/breakpoints');
 const buildImageServiceUrl = require('../helpers/build-image-service-url');
 const createImageSizes = require('../helpers/create-image-sizes');
@@ -132,12 +131,15 @@ class ImagePresenter {
 		const sourceParam = this.data.sourceParam || 'next';
 
 		if (!this.data.src && !srcSet) {
-			logger.warn('No source for image provided');
+			// Avoiding n-logger due to errors during build (plus client-side bloat)
+			// eslint-disable-line no-console
+			console.warn('No source for image provided');
 		} else if (this.data.src) {
 			return { src: this.data.src, width: this.data.width, height: this.data.height };
 		} else {
 			if (widths.length === 0) {
-				logger.warn('Widths must be provided if setting srcSet');
+				// eslint-disable-line no-console
+				console.warn('Widths must be provided if setting srcSet');
 			}
 			sourceAttrs.srcSet = widths
 				.sort((widthOne, widthTwo) => widthTwo - widthOne)
