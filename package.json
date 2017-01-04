@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "@financial-times/n-logger": "^5.4.0",
-    "react": "^15.0.1"
+    "react": "^15.0.1",
+    "react-dom": "^15.4.1"
   },
   "engines": {
     "node": "6.6.0"
