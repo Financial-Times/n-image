@@ -132,13 +132,13 @@ class ImagePresenter {
 
 		if (!this.data.src && !srcSet) {
 			// Avoiding n-logger due to errors during build (plus client-side bloat)
-			// eslint-disable-line no-console
+			// eslint-disable-next-line no-console
 			console.warn('No source for image provided');
 		} else if (this.data.src) {
 			return { src: this.data.src, width: this.data.width, height: this.data.height };
 		} else {
 			if (widths.length === 0) {
-				// eslint-disable-line no-console
+				// eslint-disable-next-line no-console
 				console.warn('Widths must be provided if setting srcSet');
 			}
 			sourceAttrs.srcSet = widths
