@@ -1,3 +1,4 @@
+const logger = require('@financial-times/n-logger').default;
 const breakpoints = require('../helpers/breakpoints');
 const buildImageServiceUrl = require('../helpers/build-image-service-url');
 const createImageSizes = require('../helpers/create-image-sizes');
@@ -129,12 +130,12 @@ class ImagePresenter {
 		const srcSet = this.data.srcSet || this.data.url;
 
 		if (!this.data.src && !srcSet) {
-			console.warn('No source for image provided');
+			logger.warn('No source for image provided');
 		} else if (this.data.src) {
 			return { src: this.data.src, width: this.data.width, height: this.data.height };
 		} else {
 			if (widths.length === 0) {
-				console.warn('Widths must be provided if setting srcSet');
+				logger.warn('Widths must be provided if setting srcSet');
 			}
 			sourceAttrs.srcSet = widths
 				.sort((widthOne, widthTwo) => widthTwo - widthOne)
