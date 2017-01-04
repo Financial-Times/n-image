@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import ImagePresenter from '../../src/presenters/image';
+import url from 'url';
 
 describe('Image Presenter', () => {
 	describe('Placeholders', () => {
@@ -169,6 +170,17 @@ describe('Image Presenter', () => {
 			});
 			expect(inst.imgAttrs.srcSet).to.not.be.defined;
 			expect(inst.imgAttrs['data-srcset']).to.equal('https://www.ft.com/__origami/service/image/v2/images/raw/foo.jpg?source=next&fit=scale-down&compression=best&width=200 200w, https://www.ft.com/__origami/service/image/v2/images/raw/foo.jpg?source=next&fit=scale-down&compression=best&width=100 100w');
+		});
+
+		it('allows a custom `source` parameter to be set for image service requests', () => {
+			const inst = new ImagePresenter({
+				srcSet: 'foo.jpg',
+				widths: '[100]',
+				lazyLoad: true,
+				sourceParam: 'custom'
+			});
+			const imageUrl = url.parse(inst.imgAttrs['data-srcset'], true);
+			expect(imageUrl.query.source).to.equal('custom');
 		});
 	});
 });

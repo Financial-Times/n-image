@@ -20,6 +20,7 @@ const createImageSizes = require('../helpers/create-image-sizes');
  * @param {string} [height] - Height of the image
  * @param {string} [alt = ''] - Alt text for the image
  * @param {boolean} [lazyLoad = false] - Lazy load the image
+ * @param {string} [sourceParam = 'next'] - The `source` parameter used in the image service request
  * @param {string|number} [placeholder] - Set to add a placeholder. Value should be the ratio of the image as a number
  * (width divided by height, e.g.`16/9`), or string (`square` or `landscape`)
  */
@@ -128,6 +129,7 @@ class ImagePresenter {
 		const sizes = this.convertToJson(this.data.sizes) || this.imageSizes() || {};
 		const widths = this.convertToJson(this.data.widths) || [];
 		const srcSet = this.data.srcSet || this.data.url;
+		const sourceParam = this.data.sourceParam || 'next';
 
 		if (!this.data.src && !srcSet) {
 			logger.warn('No source for image provided');
@@ -139,7 +141,7 @@ class ImagePresenter {
 			}
 			sourceAttrs.srcSet = widths
 				.sort((widthOne, widthTwo) => widthTwo - widthOne)
-				.map(width => `${buildImageServiceUrl(srcSet, { width })} ${width}w`)
+				.map(width => `${buildImageServiceUrl(srcSet, { width, source: sourceParam })} ${width}w`)
 				.join(', ');
 
 			sourceAttrs.sizes = breakpoints
