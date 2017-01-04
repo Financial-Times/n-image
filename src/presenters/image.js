@@ -19,7 +19,7 @@ const createImageSizes = require('../helpers/create-image-sizes');
  * @param {string} [height] - Height of the image
  * @param {string} [alt = ''] - Alt text for the image
  * @param {boolean} [lazyLoad = false] - Lazy load the image
- * @param {string} [sourceParam = 'next] - The `source` parameter used in the image service request
+ * @param {string} [sourceParam = 'next'] - The `source` parameter used in the image service request
  * @param {string|number} [placeholder] - Set to add a placeholder. Value should be the ratio of the image as a number
  * (width divided by height, e.g.`16/9`), or string (`square` or `landscape`)
  */
