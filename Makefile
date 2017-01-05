@@ -14,4 +14,9 @@ demo-build:
 
 demo: demo-build
 	node demos/app
-test: verify unit-test
+
+a11y: demo-build
+	node .pa11yci.js
+	PA11Y=true node demos/app
+
+test: verify unit-test a11y
