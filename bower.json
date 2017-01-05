@@ -11,17 +11,12 @@
   ],
   "license": "MIT",
   "ignore": [
-    "tests",
-    ".gitignore",
-    ".npmignore",
-    "circle.yml",
-    "ft.yml",
-    "Makefile",
-    "n.Makefile",
-    "package.json"
+    ".babelrc"
   ],
   "dependencies": {
     "n-ui": "^2.0.0"
   },
-  "ignore": [ ".babelrc" ]
+  "devDependencies": {
+    "n-ui": "^2.62.11"
+  }
 }

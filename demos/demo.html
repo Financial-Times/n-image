@@ -1,0 +1,10 @@
+<div class="o-grid-container">
+	<h1>Demo of n-image</h1>
+	<div class="o-grid-row">
+		<div data-o-grid-colspan="12 M4">
+			{{#nImagePresenter srcSet=image.url placeholder=image.ratio colspan='{ "default": 12, "M": 6, "L": 5.25 }' position='{"default": "left"}' widths="[131, 196, 276]" lazyLoad=false sourceParam="n-image"}}
+				{{> n-image/templates/image }}
+			{{/nImagePresenter}}
+		</div>
+	</div>
+</div>

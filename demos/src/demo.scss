@@ -1,0 +1,8 @@
+@import 'n-ui/configure';
+
+@include nUiConfigure(
+	$preset: 'complete',
+	$output-critical: true
+);
+
+@import 'n-ui/bootstrap';
