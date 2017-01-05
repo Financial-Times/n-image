@@ -45,7 +45,7 @@ function runPa11yTests () {
 }
 
 const listen = app.listen(5005);
-	
+
 if (process.env.PA11Y === 'true') {
 	listen.then(runPa11yTests);
 }
