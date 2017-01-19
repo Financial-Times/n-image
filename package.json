@@ -30,7 +30,7 @@
     "react-dom": "^15.4.1"
   },
   "engines": {
-    "node": "6.6.0"
+    "node": ">=6.6.0"
   },
   "scripts": {
     "prepublish": "make transpile"
