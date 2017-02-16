@@ -14,6 +14,6 @@
     ".babelrc"
   ],
   "dependencies": {
-    "n-ui": ">=2.0.0 <4.0.0"
+    "n-ui": "^3"
   }
 }
