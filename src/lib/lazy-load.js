@@ -47,14 +47,14 @@ const measure = (uid) => {
 
 const report = (name) => {
 	if (performance && performance.getEntriesByName) {
-		const entry = performance.getEntriesByName(name)[0];
+		const entry = performance.getEntriesByName(name);
 		const selector = `img[data-uid="${name}"]`;
 		const img = document.querySelector(selector);
 		if(img && img.currentSrc){
 			const eventData = {
 				category: 'lazy-image-load',
 				action: 'timing',
-				data: {src:img.currentSrc, duration:entry.duration}
+				data: {src:img.currentSrc, duration:entry.length ? entry[0] : null}
 			};
 			broadcast('oTracking.event', eventData);
 		}
