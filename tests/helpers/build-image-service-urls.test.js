@@ -16,4 +16,10 @@ describe('Build image service url helper', () => {
 		const imageUrl = buildImageServiceUrl('https://www.example.com/image.png');
 		expect(imageUrl).to.equal('https://www.ft.com/__origami/service/image/v2/images/raw/https%3A%2F%2Fwww.example.com%2Fimage.png?source=next&fit=scale-down&compression=best');
 	});
+
+	it('does not send image service urls to the image service again', () => {
+		const imageUrl = buildImageServiceUrl('https://www.ft.com/__origami/service/image/v2/images/raw/fthead-v1:tim-harford?source=next&fit=scale-down&compression=best&tint=054593,d6d5d3');
+		expect(imageUrl).to.equal('https://www.ft.com/__origami/service/image/v2/images/raw/fthead-v1:tim-harford?source=next&fit=scale-down&compression=best&tint=054593,d6d5d3');
+	});
+
 });
