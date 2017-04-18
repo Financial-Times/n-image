@@ -7,4 +7,5 @@
 .DS_Store
 .editorconfig
 .eslintrc.js
+.pa11yci.js
 .scss-lint.yml
