@@ -1,5 +1,5 @@
 include n.Makefile
-
+IGNORE_A11Y = true
 transpile:
 	babel src -d dist
 
