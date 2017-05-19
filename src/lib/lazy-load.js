@@ -90,9 +90,11 @@ const loadImage = img => {
 
 const intersectionCallback = (observer, changes) => {
 	changes.forEach(change => {
-		const observedImg = change.target;
-		loadImage(observedImg);
-		observer.unobserve(observedImg);
+		if(change.intersectionRatio > 0) {
+			const observedImg = change.target;
+			loadImage(observedImg);
+			observer.unobserve(observedImg);
+		}
 	});
 };
 
