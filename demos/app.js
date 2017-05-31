@@ -1,6 +1,6 @@
 'use strict';
 
-const express = require('@financial-times/n-express');
+const express = require('@financial-times/n-internal-tool');
 const fixtures = require('./fixtures.json');
 const chalk = require('chalk');
 const errorHighlight = chalk.bold.red;
@@ -8,6 +8,7 @@ const highlight = chalk.bold.green;
 
 const app = module.exports = express({
 	name: 'public',
+	systemCode: 'n-image-demo',
 	withFlags: false,
 	withHandlebars: true,
 	withNavigation: false,
@@ -15,7 +16,9 @@ const app = module.exports = express({
 	hasHeadCss: false,
 	viewsDirectory: '/demos',
 	partialsDirectory: process.cwd(),
-	directory: process.cwd()
+	directory: process.cwd(),
+	demo: true,
+	s3o: false
 });
 
 app.get('/', (req, res) => {
