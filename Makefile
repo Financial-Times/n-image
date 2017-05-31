@@ -4,7 +4,6 @@ node_modules/@financial-times/n-gage/index.mk:
 
 -include node_modules/@financial-times/n-gage/index.mk
 
-IGNORE_A11Y = true
 transpile:
 	babel src -d dist
 
@@ -21,8 +20,9 @@ demo-build:
 demo: demo-build
 	node demos/app
 
-#a11y: demo-build
-#	node .pa11yci.js
-#	PA11Y=true node demos/app
+a11y: demo-build
+	@node .pa11yci.js
+	@PA11Y=true node demos/app
+	@$(DONE)
 
 test: verify unit-test
