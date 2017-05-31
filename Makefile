@@ -26,3 +26,4 @@ a11y: demo-build
 	@$(DONE)
 
 test: verify unit-test
+	make a11y
