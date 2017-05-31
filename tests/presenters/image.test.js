@@ -121,7 +121,7 @@ describe('Image Presenter', () => {
 				widths: '[100, 200]'
 			});
 			expect(inst.imgAttrs.src).to.not.be.defined;
-			expect(inst.imgAttrs.srcSet).to.equal('https://www.ft.com/__origami/service/image/v2/images/raw/foo.jpg?source=next&fit=scale-down&compression=best&width=200 200w, https://www.ft.com/__origami/service/image/v2/images/raw/foo.jpg?source=next&fit=scale-down&compression=best&width=100 100w')
+			expect(inst.imgAttrs.srcSet).to.equal('https://www.ft.com/__origami/service/image/v2/images/raw/foo.jpg?source=next&fit=scale-down&compression=best&width=200 200w, https://www.ft.com/__origami/service/image/v2/images/raw/foo.jpg?source=next&fit=scale-down&compression=best&width=100 100w');
 		});
 
 		it('checks for url if no srcSet', () => {
@@ -130,7 +130,7 @@ describe('Image Presenter', () => {
 				widths: '[100, 200]'
 			});
 			expect(inst.imgAttrs.src).to.not.be.defined;
-			expect(inst.imgAttrs.srcSet).to.equal('https://www.ft.com/__origami/service/image/v2/images/raw/foo.jpg?source=next&fit=scale-down&compression=best&width=200 200w, https://www.ft.com/__origami/service/image/v2/images/raw/foo.jpg?source=next&fit=scale-down&compression=best&width=100 100w')
+			expect(inst.imgAttrs.srcSet).to.equal('https://www.ft.com/__origami/service/image/v2/images/raw/foo.jpg?source=next&fit=scale-down&compression=best&width=200 200w, https://www.ft.com/__origami/service/image/v2/images/raw/foo.jpg?source=next&fit=scale-down&compression=best&width=100 100w');
 		});
 
 		it('uses sizes attribute when given sizes in data', () => {
