@@ -1,6 +1,6 @@
 const qs = require('querystring');
 
-const capiRX = /^https?:\/\/(?:com\.ft\.imagepublish\.prod(?:-us)?\.s3\.amazonaws\.com|im\.ft-static\.com\/content\/images)\/([0-9a-f-]+)(?:\.img)?$/i
+const capiRX = /^https?:\/\/(?:com\.ft\.imagepublish\.prod(?:-us)?\.s3\.amazonaws\.com|im\.ft-static\.com\/content\/images)\/([0-9a-f-]+)(?:\.img)?$/i;
 
 module.exports = (url, params = {}, { host = 'https://www.ft.com/__origami/service/image/v2/images/raw/' } = { }) => {
 	//if the url is already an image service URL, serve it as is

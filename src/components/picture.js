@@ -7,7 +7,7 @@ const createImg = attrs => {
 	const attrsStringified = Object.keys(attrs)
 		.map(attrName => `${attrName}="${attrs[attrName]}"`)
 		.join(' ');
-	return `<img ${attrsStringified} />`
+	return `<img ${attrsStringified} />`;
 };
 
 const createSources = (urls, { alt = '', classes = [], withFallback = false }) => {
@@ -16,7 +16,7 @@ const createSources = (urls, { alt = '', classes = [], withFallback = false }) =
 		.filter(breakpoint => breakpoint.name !== 'default')
 		.map(breakpoint => {
 			const url = urls[breakpoint.name];
-			return url ? `<source srcset="${url}" media="(min-width: ${breakpoint.px}px)" />` : null
+			return url ? `<source srcset="${url}" media="(min-width: ${breakpoint.px}px)" />` : null;
 		})
 		.filter(source => source);
 	if (sources.length) {

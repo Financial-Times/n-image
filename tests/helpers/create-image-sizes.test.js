@@ -9,7 +9,7 @@ describe('Create image sizes helper', () => {
 	};
 	const position = {
 		'default': 'left'
-	}
+	};
 	it('returns an object with sizes for each provided breakpoint', () => {
 		const sizes = createImageSizes(colspan, position);
 		expect(sizes.default).to.equal('calc(40vw - 16px)');
