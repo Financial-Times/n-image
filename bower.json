@@ -14,7 +14,7 @@
     ".babelrc"
   ],
   "dependencies": {
-    "n-ui-foundations": "^2.0.0-alpha"
+    "n-ui-foundations": "^2.0.0-beta"
   },
   "resolutions": {
     "o-colors": "^4.0.1"
