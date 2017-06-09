@@ -4,11 +4,8 @@ node_modules/@financial-times/n-gage/index.mk:
 
 -include node_modules/@financial-times/n-gage/index.mk
 
-transpile:
-	babel src -d dist
-
 unit-test:
-	mocha --require tests/setup --recursive --reporter spec tests
+	mocha --recursive --reporter spec tests
 
 demo-build:
 	@rm -rf bower_components/n-image
