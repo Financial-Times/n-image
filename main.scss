@@ -56,9 +56,7 @@ $_n-image_applied: false !default;
 		transition: opacity 1s;
 
 		.n-image-wrapper--placeholder & {
-			position: absolute;
-			top: 0;
-			left: 0;
+			float: left;
 			min-height: 1px; //Edge IntersectionObserver requires a non-zero height and width
 		}
 	}
