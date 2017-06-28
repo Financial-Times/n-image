@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import createImageSizes from '../../src/helpers/create-image-sizes';
+const { expect } = require('chai');
+const createImageSizes = require('../../src/helpers/create-image-sizes');
 
 describe('Create image sizes helper', () => {
 	const colspan = {
