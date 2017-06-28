@@ -35,7 +35,9 @@
   },
   "scripts": {
     "prepublish": "make transpile",
-    "commit": "commit-wizard"
+    "commit": "commit-wizard",
+    "precommit": "node_modules/.bin/secret-squirrel",
+    "prepush": "make verify -j3"
   },
   "config": {
     "pre-git": {
