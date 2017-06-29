@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import buildImageServiceUrl from '../../src/helpers/build-image-service-url';
+const { expect } = require('chai');
+const buildImageServiceUrl = require('../../src/helpers/build-image-service-url');
 
 describe('Build image service url helper', () => {
 	it('converts capi eu images to ftcms scheme', () => {

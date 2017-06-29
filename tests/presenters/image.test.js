@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import ImagePresenter from '../../src/presenters/image';
-import url from 'url';
+const { expect } = require('chai');
+const ImagePresenter = require('../../src/presenters/image');
+const url = require('url');
 
 describe('Image Presenter', () => {
 	describe('Placeholders', () => {

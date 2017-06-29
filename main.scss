@@ -23,7 +23,7 @@ $_n-image_applied: false !default;
 		padding-bottom: 56.25%;
 
 		&.n-image-wrapper--lazy-loading {
-			background-color: #dadada;
+			background-color: oColorsGetPaletteColor('black-20');
 
 			&:before {
 				content: '';
