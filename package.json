@@ -29,6 +29,7 @@
   "config": {},
   "scripts": {
     "precommit": "node_modules/.bin/secret-squirrel",
-    "prepush": "make verify -j3"
+    "prepush": "make verify -j3",
+    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg"
   }
 }

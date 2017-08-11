@@ -59,6 +59,13 @@ $_n-image_applied: false !default;
 			float: left;
 			min-height: 1px; //Edge IntersectionObserver requires a non-zero height and width
 		}
+
+		.o-teaser--hero.o-teaser--has-image & { // fixes image position bug on ie11
+			&.o-teaser__image {
+				position: absolute;
+			}
+		}
+
 	}
 
 	.n-image--lazy-loading {

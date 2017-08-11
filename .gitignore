@@ -9,4 +9,5 @@
 .editorconfig
 .eslintrc.js
 .scss-lint.yml
+package-lock.json
 *.env*
