@@ -65,22 +65,22 @@ A very minimal SASS file is available
 import { Image } from '@financial-times/n-image';
 
 <Image
-    url="an/image.jpg"
-    widths={[100, 200]}
-    sizes={{ default: '100vw', XL: '100vw * 0.5' }}
-    classes={['a-class', 'another-class']}
-    alt="A useful description" />
+	url="an/image.jpg"
+	widths={[100, 200]}
+	sizes={{ default: '100vw', XL: '100vw * 0.5' }}
+	classes={['a-class', 'another-class']}
+	alt="A useful description" />
 ```
 
 renders to
 
 ```
 <img
-    class="n-image a-class another-class"
-    alt="A useful description"
-    sizes="(min-width: 1220px) 100vw * 0.5, 100vw"
-    srcset="https://www.ft.com/__origami/service/image/v2/images/raw/an%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=100 100w,
-            https://www.ft.com/__origami/service/image/v2/images/raw/an%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=200 200w" />
+	class="n-image a-class another-class"
+	alt="A useful description"
+	sizes="(min-width: 1220px) 100vw * 0.5, 100vw"
+	srcset="https://www.ft.com/__origami/service/image/v2/images/raw/an%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=100 100w,
+			https://www.ft.com/__origami/service/image/v2/images/raw/an%2Fimage.jpg?source=next&fit=scale-down&compression=best&width=200 200w" />
 ```
 
 #### `picture` Element
@@ -91,20 +91,20 @@ The `picture` element is used when you need explicit control over which source i
 import { Picture } from '@financial-times/n-image';
 
 <Picture
-    urls={{ default: 'an/image.jpg', XL: 'another/image.jpg }}
-    classes={['picture-class']}
-    imgClasses={['img-class', 'another-img-class']}
-    alt="A useful description" />
+	urls={{ default: 'an/image.jpg', XL: 'another/image.jpg }}
+	classes={['picture-class']}
+	imgClasses={['img-class', 'another-img-class']}
+	alt="A useful description" />
 ```
 
 renders to
 
 ```
 <picture class="n-image picture-class">
-    <!--[if IE 9]><video style="display: none;"><![endif]-->
-    <source srcset="an/image.jpg" media="(min-width: 1220px)" />
-    <!--[if IE 9]></video><![endif]-->
-    <img class="n-image__img img-class another-img-class" alt="A useful description" srcset="an/image.jpg" />
+	<!--[if IE 9]><video style="display: none;"><![endif]-->
+	<source srcset="an/image.jpg" media="(min-width: 1220px)" />
+	<!--[if IE 9]></video><![endif]-->
+	<img class="n-image__img img-class another-img-class" alt="A useful description" srcset="an/image.jpg" />
 </picture>
 ```
 
