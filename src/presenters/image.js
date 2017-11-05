@@ -111,7 +111,7 @@ class ImagePresenter {
 		}
 	}
 
-	// convert the `src` or `srcset` attribtues to a data attribute
+	// convert the `src` or `srcset` attributes to a data attribute
 	hideImage (obj) {
 		return Object.keys(obj)
 			.reduce((dataObj, name) => {
