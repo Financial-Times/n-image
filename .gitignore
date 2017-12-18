@@ -8,6 +8,6 @@
 .DS_Store
 .editorconfig
 .eslintrc.js
-.scss-lint.yml
+.stylelintrc
 package-lock.json
 *.env*

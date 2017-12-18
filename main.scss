@@ -25,7 +25,7 @@ $_n-image_applied: false !default;
 		&.n-image-wrapper--lazy-loading {
 			background-color: oColorsGetPaletteColor('black-20');
 
-			&:before {
+			&::before {
 				content: '';
 				position: absolute;
 				display: block;
@@ -45,7 +45,9 @@ $_n-image_applied: false !default;
 
 	.n-image-wrapper--lazy-loading {
 		.core & {
+			/* stylelint-disable declaration-no-important */
 			display: none !important;
+			/* stylelint-enable declaration-no-important */
 		}
 	}
 
@@ -72,6 +74,7 @@ $_n-image_applied: false !default;
 		opacity: 0;
 		width: 100%;
 	}
-
+	/* stylelint-disable */
 	$_n-image_applied: true !global;
+	/* stylelint-enable */
 }
