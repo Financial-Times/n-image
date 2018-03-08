@@ -73,9 +73,13 @@ const imageHasLoaded = img => {
 
 const loadImage = img => {
 	const uid = setUid(img);
+	const start = Date.now();
+	
 	img.addEventListener('load', () => {
 		// NOTE: rather arbitrary, needed to get the fading to always work (possibly classes being removed to quickly)
 		setTimeout(imageHasLoaded.bind(null, img), 13);
+		const end = Date.now();
+		console.log(`Loading took ${end - start}ms`);
 	});
 	mark('START', uid);
 	// add the src/srcset attribtues back in
@@ -115,7 +119,7 @@ const observeIntersection = ({ observer }, img) => {
  */
 module.exports = ({ root = document } = { }) => {
 	const observer = window.IntersectionObserver ?
-		new IntersectionObserver(
+		new window.IntersectionObserver(
 			function (changes) {
 				intersectionCallback(this, changes);
 			}
