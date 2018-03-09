@@ -11,6 +11,8 @@
 		{{#if data-srcset}} data-srcset="{{data-srcset}}"{{/if}}
 		{{#if sizes}} sizes="{{sizes}}"{{/if}}
 		{{#if role}} role="{{role}}"{{/if}}
-		alt="{{alt}}" class="{{className}}" />
+		alt="{{alt}}"
+		class="{{className}}{{#unless @root.flags.imgNoFadeOnLoad}} n-image--fade-on-load{{/unless}}"
+		/>
 	{{/with}}
 </div>

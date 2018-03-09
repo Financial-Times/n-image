@@ -55,7 +55,10 @@ $_n-image_applied: false !default;
 		display: block;
 		max-width: 100%;
 		opacity: 1;
-		transition: opacity 1s;
+
+		&.n-image--fade-on-load {
+			transition: opacity 1s;
+		}
 
 		.n-image-wrapper--placeholder & {
 			float: left;
