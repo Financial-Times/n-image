@@ -57,7 +57,7 @@ $_n-image_applied: false !default;
 		opacity: 1;
 
 		&.n-image--fade-on-load {
-			transition: opacity 1s;
+			transition: opacity 0.5s;
 		}
 
 		.n-image-wrapper--placeholder & {
