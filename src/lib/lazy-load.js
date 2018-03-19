@@ -1,9 +1,11 @@
+const featureDetect = require('./browserFeatureDetect');
 const lazyLoadingModifier = 'lazy-loading';
 const lazyLoadingImageClass = `n-image--${lazyLoadingModifier}`;
 const lazyLoadingWrapperClass = `n-image-wrapper--${lazyLoadingModifier}`;
 
 const uid = () => (Date.now() * Math.random()).toString(16);
 const performance = window.LUX || window.performance || window.msPerformance || window.webkitPerformance || window.mozPerformance;
+const eventListenOnceSupported = featureDetect.eventListenOptionSupported('once');
 
 //todo this stuff all lives (or should live) in n-ui but circular dependencies don't work
 const perfMeasure = (name, start, end) => {
@@ -67,7 +69,6 @@ const imageHasLoaded = img => {
 	measure(uid);
 	img.classList.remove(lazyLoadingImageClass);
 	img.parentNode.classList.remove(lazyLoadingWrapperClass);
-	img.removeEventListener('load', imageHasLoaded);
 	report(uid);
 };
 
@@ -76,9 +77,9 @@ const loadImage = img => {
 	img.addEventListener('load', () => {
 		// NOTE: rather arbitrary, needed to get the fading to always work (possibly classes being removed to quickly)
 		setTimeout(imageHasLoaded.bind(null, img), 13);
-	});
+	}, eventListenOnceSupported ? { once: true } : undefined);
 	mark('START', uid);
-	// add the src/srcset attribtues back in
+	// add the src/srcset attributes back in
 	[...img.attributes]
 		.forEach(attr => {
 			if (/^data-src(set)?$/.test(attr.name)) {
@@ -114,10 +115,14 @@ const observeIntersection = ({ observer }, img) => {
  * @param {Element} [opts.root = document] - Where in the DOM to search for images
  */
 module.exports = ({ root = document } = { }) => {
+	const verticalMargin = window.FT && window.FT.flags && window.FT.flags.get('imgLazyLoadThreshold') || '0px';
 	const observer = window.IntersectionObserver ?
-		new IntersectionObserver(
+		new window.IntersectionObserver(
 			function (changes) {
 				intersectionCallback(this, changes);
+			},
+			{
+				rootMargin: `${verticalMargin} 0px ${verticalMargin} 0px`
 			}
 		) :
 		null;
