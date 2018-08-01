@@ -15,7 +15,6 @@ describe('lazy-load', () => {
 		dom = new JSDOM(`
 		<img id="image1" class="n-image--lazy-loading" />
 		<img id="image2" class="n-image--lazy-loading" />
-		<img id="image3" class="not-lazy-loading" />
 	`);
 
 		global.window = dom.window;
