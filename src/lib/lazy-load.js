@@ -56,9 +56,9 @@ module.exports = ({ root = document } = { }) => {
 		})
 		: null;
 
-	const targets = Array.from(root.querySelectorAll(`.${lazyLoadingImageClass}`));
+	const targets = root.querySelectorAll(`.${lazyLoadingImageClass}`);
 
-	targets.forEach(img => {
+	targets.forEach((img) => {
 		if (img.hasAttribute('data-n-image-lazy-load-js') === false) {
 			observeIntersection(img, observer);
 		}
