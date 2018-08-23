@@ -38,10 +38,8 @@ const observeIntersection = (img, observer) => {
 		loadImage(img);
 	}
 
-	img.setAttribute('data-n-image-lazy-load-js', '');
+	img.setAttribute('data-n-image-lazy-load-js', true);
 };
-
-
 
 /**
  * @param {Object} [opts = {}]
@@ -56,10 +54,10 @@ module.exports = ({ root = document } = { }) => {
 		})
 		: null;
 
-	const targets = root.querySelectorAll(`.${lazyLoadingImageClass}`);
+	const targets = Array.from(root.getElementsByClassName(lazyLoadingImageClass));
 
 	targets.forEach((img) => {
-		if (img.hasAttribute('data-n-image-lazy-load-js') === false) {
+		if (!img.hasAttribute('data-n-image-lazy-load-js')) {
 			observeIntersection(img, observer);
 		}
 	});
