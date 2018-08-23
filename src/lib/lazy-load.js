@@ -22,7 +22,7 @@ const loadImage = img => {
 	});
 };
 
-const intersectionCallback = (observer, changes) => {
+const intersectionCallback = (changes, observer) => {
 	changes.forEach(change => {
 		if (change.isIntersecting || change.intersectionRatio > 0) {
 			loadImage(change.target);
@@ -38,7 +38,7 @@ const observeIntersection = (img, observer) => {
 		loadImage(img);
 	}
 
-	img.setAttribute('data-n-image-lazy-load-js', true);
+	img.setAttribute('data-n-image-lazy-load-js', '');
 };
 
 /**
@@ -57,7 +57,7 @@ module.exports = ({ root = document } = { }) => {
 	const targets = Array.from(root.getElementsByClassName(lazyLoadingImageClass));
 
 	targets.forEach((img) => {
-		if (!img.hasAttribute('data-n-image-lazy-load-js')) {
+		if (img.hasAttribute('data-n-image-lazy-load-js') === false) {
 			observeIntersection(img, observer);
 		}
 	});
