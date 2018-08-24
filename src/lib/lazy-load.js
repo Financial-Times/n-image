@@ -1,114 +1,45 @@
-const featureDetect = require('./browserFeatureDetect');
 const lazyLoadingModifier = 'lazy-loading';
 const lazyLoadingImageClass = `n-image--${lazyLoadingModifier}`;
 const lazyLoadingWrapperClass = `n-image-wrapper--${lazyLoadingModifier}`;
 
-const uid = () => (Date.now() * Math.random()).toString(16);
-const performance = window.LUX || window.performance || window.msPerformance || window.webkitPerformance || window.mozPerformance;
-const eventListenOnceSupported = featureDetect.eventListenOptionSupported('once');
-
-//todo this stuff all lives (or should live) in n-ui but circular dependencies don't work
-const perfMeasure = (name, start, end) => {
-	if (performance && performance.measure) {
-		performance.measure(name, start, end);
-	}
-};
-
-const perfMark = name => {
-	if (performance && performance.mark) {
-		performance.mark(name);
-	}
-};
-
-const broadcast = (eventName, data) => {
-	// only do this 1% of the item so we don't flood Keen
-	if(Math.random().toFixed(2) !== '0.01'){
-		return;
-	}
-	const event = new CustomEvent(eventName, {detail:data});
-	document.body.dispatchEvent(event);
-};
-
-const setUid = (img) => {
-	const id = uid();
-	img.setAttribute('data-uid', id);
-	return id;
-};
-
-const getUid = (img) => {
-	return img.getAttribute('data-uid');
-};
-
-const mark = (event, uid) => {
-	perfMark(`${event}:${uid}`);
-};
-
-const measure = (uid) => {
-	perfMeasure(uid, `START:${uid}`, `END:${uid}`);
-};
-
-const report = (name) => {
-	if (performance && performance.getEntriesByName) {
-		const entry = performance.getEntriesByName(name);
-		const selector = `img[data-uid="${name}"]`;
-		const img = document.querySelector(selector);
-		if(img && img.currentSrc){
-			const eventData = {
-				category: 'lazy-image-load',
-				action: 'timing',
-				data: {src:img.currentSrc, duration:entry.length ? entry[0] : null}
-			};
-			broadcast('oTracking.event', eventData);
-		}
-	}
-};
-
 const imageHasLoaded = img => {
-	const uid = getUid(img);
-	mark('END', uid);
-	measure(uid);
 	img.classList.remove(lazyLoadingImageClass);
 	img.parentNode.classList.remove(lazyLoadingWrapperClass);
-	report(uid);
 };
 
 const loadImage = img => {
-	const uid = setUid(img);
 	img.addEventListener('load', () => {
-		// NOTE: rather arbitrary, needed to get the fading to always work (possibly classes being removed to quickly)
+		// HACK: rather arbitrary, needed to get the fading to always work (possibly classes being removed to quickly)
 		setTimeout(imageHasLoaded.bind(null, img), 13);
-	}, eventListenOnceSupported ? { once: true } : undefined);
-	mark('START', uid);
-	// add the src/srcset attributes back in
-	[...img.attributes]
-		.forEach(attr => {
-			if (/^data-src(set)?$/.test(attr.name)) {
-				img.setAttribute(attr.name.replace('data-', ''), attr.value);
-				img.removeAttribute(attr.name);
-			}
-		});
-};
+	});
 
-const intersectionCallback = (observer, changes) => {
-	changes.forEach(change => {
-		if(change.isIntersecting || change.intersectionRatio > 0) {
-			const observedImg = change.target;
-			loadImage(observedImg);
-			observer.unobserve(observedImg);
+	// add the src/srcset attributes back in
+	Array.from(img.attributes).forEach(attr => {
+		if (/^data-src(set)?$/.test(attr.name)) {
+			img.setAttribute(attr.name.replace('data-', ''), attr.value);
+			img.removeAttribute(attr.name);
 		}
 	});
 };
 
-const observeIntersection = ({ observer }, img) => {
+const intersectionCallback = (changes, observer) => {
+	changes.forEach(change => {
+		if (change.isIntersecting || change.intersectionRatio > 0) {
+			loadImage(change.target);
+			observer.unobserve(change.target);
+		}
+	});
+};
+
+const observeIntersection = (img, observer) => {
 	if (observer) {
 		observer.observe(img);
 	} else {
 		loadImage(img);
 	}
+
 	img.setAttribute('data-n-image-lazy-load-js', '');
 };
-
-
 
 /**
  * @param {Object} [opts = {}]
@@ -116,17 +47,18 @@ const observeIntersection = ({ observer }, img) => {
  */
 module.exports = ({ root = document } = { }) => {
 	const verticalMargin = window.FT && window.FT.flags && window.FT.flags.get('imgLazyLoadThreshold') || '0px';
-	const observer = window.IntersectionObserver ?
-		new window.IntersectionObserver(
-			function (changes) {
-				intersectionCallback(this, changes);
-			},
-			{
-				rootMargin: `${verticalMargin} 0px ${verticalMargin} 0px`
-			}
-		) :
-		null;
-	[...root.querySelectorAll(`.${lazyLoadingImageClass}`)]
-		.filter(img => !img.hasAttribute('data-n-image-lazy-load-js'))
-		.forEach(observeIntersection.bind(null, { observer }));
+
+	const observer = window.IntersectionObserver
+		? new window.IntersectionObserver(intersectionCallback, {
+			rootMargin: `${verticalMargin} 0px ${verticalMargin} 0px`
+		})
+		: null;
+
+	const targets = Array.from(root.getElementsByClassName(lazyLoadingImageClass));
+
+	targets.forEach((img) => {
+		if (img.hasAttribute('data-n-image-lazy-load-js') === false) {
+			observeIntersection(img, observer);
+		}
+	});
 };
