@@ -22,7 +22,7 @@ const loadImage = img => {
 	});
 };
 
-const intersectionCallback = (changes, observer) => {
+const intersectionCallback = (observer, changes) => {
 	changes.forEach(change => {
 		if (change.isIntersecting || change.intersectionRatio > 0) {
 			loadImage(change.target);
@@ -48,17 +48,18 @@ const observeIntersection = (img, observer) => {
 module.exports = ({ root = document } = { }) => {
 	const verticalMargin = window.FT && window.FT.flags && window.FT.flags.get('imgLazyLoadThreshold') || '0px';
 
-	const observer = window.IntersectionObserver
-		? new window.IntersectionObserver(intersectionCallback, {
+	if (window.IntersectionObserver) {
+		const observer = new window.IntersectionObserver(function (changes) {
+			intersectionCallback(observer, changes);
+		}, {
 			rootMargin: `${verticalMargin} 0px ${verticalMargin} 0px`
-		})
-		: null;
+		});
+		const targets = Array.from(root.getElementsByClassName(lazyLoadingImageClass));
 
-	const targets = Array.from(root.getElementsByClassName(lazyLoadingImageClass));
-
-	targets.forEach((img) => {
-		if (img.hasAttribute('data-n-image-lazy-load-js') === false) {
-			observeIntersection(img, observer);
-		}
-	});
+		targets.forEach((img) => {
+			if (img.hasAttribute('data-n-image-lazy-load-js') === false) {
+				observeIntersection(img, observer);
+			}
+		});
+	}
 };
