@@ -8,8 +8,6 @@ $_n-image_applied: false !default;
 	}
 
 	.n-image-wrapper--placeholder {
-		background-color: transparent;
-		transition: background-color 1s;
 		padding-bottom: 56.25%;
 
 		&.n-image-wrapper--lazy-loading {
