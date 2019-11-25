@@ -1,4 +1,4 @@
-@import 'n-ui-foundations/main';
+@import 'n-ui-foundations/mixins';
 
 $_n-image_applied: false !default;
 
@@ -11,7 +11,7 @@ $_n-image_applied: false !default;
 		padding-bottom: 56.25%;
 
 		&.n-image-wrapper--lazy-loading {
-			background-color: oColorsGetPaletteColor('black-20');
+			background-color: oColorsByName('black-20');
 
 			&::before {
 				content: '';
