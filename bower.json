@@ -14,6 +14,6 @@
     ".babelrc"
   ],
   "dependencies": {
-    "n-ui-foundations": "^3.0.0-beta"
+    "n-ui-foundations": "3.2.0"
   }
 }
