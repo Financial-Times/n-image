@@ -1,4 +1,4 @@
-@import 'n-ui-foundations/main';
+@import 'n-ui-foundations/mixins';
 
 $_n-image_applied: false !default;
 
@@ -11,7 +11,7 @@ $_n-image_applied: false !default;
 		padding-bottom: 56.25%;
 
 		&.n-image-wrapper--lazy-loading {
-			background-color: oColorsGetPaletteColor('black-20');
+			background-color: oColorsByName('black-20');
 
 			&::before {
 				content: '';
@@ -51,13 +51,6 @@ $_n-image_applied: false !default;
 			float: left;
 			min-height: 1px; //Edge IntersectionObserver requires a non-zero height and width
 		}
-
-		.o-teaser--hero.o-teaser--has-image & { // fixes image position bug on ie11
-			&.o-teaser__image {
-				position: absolute;
-			}
-		}
-
 	}
 
 	.n-image--lazy-loading {
