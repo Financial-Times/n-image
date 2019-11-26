@@ -11,6 +11,7 @@ demo-build:
 	@rm -rf bower_components/n-image
 	@mkdir bower_components/n-image
 	@cp -r templates/ bower_components/n-image/templates/
+	@browserify demos/src/demo.js --outfile public/main.js
 	@node-sass demos/src/demo.scss public/main.css --include-path bower_components
 	@$(DONE)
 
