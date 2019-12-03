@@ -1,4 +1,6 @@
-#  N-Image [![Circle CI](https://circleci.com/gh/Financial-Times/n-image.svg?style=svg)](https://circleci.com/gh/Financial-Times/n-image)
+#  n-Image [![Circle CI](https://circleci.com/gh/Financial-Times/n-image.svg?style=svg)](https://circleci.com/gh/Financial-Times/n-image)
+
+⚠️ This component is deprecated. Please use a plain `<img>` or `<picture>` element to render images on the server and use [`o-lazy-load`](https://github.com/Financial-Times/o-lazy-load/) for client-side lazy-loading functionality. ⚠️
 
 Bower component/Node module for responsive images.
 
