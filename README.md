@@ -110,10 +110,10 @@ renders to
 </picture>
 ```
 
-##Demo page
+## Demo page
 `$ make demo`: Serves examples of the component locally (`http://localhost:5005`), using dummy data and in isolation from an app.
 
 This is done on a simple express app which renders a single demo page that calls the partial to exhibit, populating it with data from a fixture.
 
-##Pa11y
+## Pa11y
 `$ make a11y`: Serves page of demo components, on which it runs [Pa11y](http://pa11y.org/) accessibility tests (errors flagging up accessibility infringements), which will also be run as part of the Continuous Integration (CI) process.
